@@ -20,9 +20,16 @@ class MerchantRepository
     merchants.shuffle.pop
   end
 
+  ##do we need to write a method for every attribute or can we make a super or unvieral one??
   def find_by(attribute, value)
     # find_by merchant attribute and return instance
     @merchants.detect do |merchant|
+      merchant.send(attribute) == value
+    end
+  end
+
+  def find_all_by(attribute, value)
+    @merchants.select do |merchant|
       merchant.send(attribute) == value
     end
   end
