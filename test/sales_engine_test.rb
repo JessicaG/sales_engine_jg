@@ -19,4 +19,16 @@ class SalesEngineTest < Minitest::Test
     engine = SalesEngine.new
     assert engine.startup
   end
+
+  def test_repositories_exist
+    engine = SalesEngine.new
+    engine.startup
+    engine.create_repositories
+    assert engine.merchant_repository
+    assert engine.invoice_repository
+    assert engine.item_repository
+    assert engine.invoice_item_repository
+    assert engine.customer_repository
+    assert engine.transactions_repository
+  end
 end
