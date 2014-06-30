@@ -17,4 +17,10 @@ class MerchantTest < Minitest::Test
     # looking for the name attribute in the merchants array
     assert @merchant_repository.merchants.first.name.match('Schroeder-Jerde')
   end
+
+  def test_it_can_return_a_random_merchant
+    @merchant_repository
+    #checking if can return a merchant at random from the array
+    assert @merchant_repository.merchants.name.random
+  end
 end
