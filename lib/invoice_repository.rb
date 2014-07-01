@@ -16,7 +16,7 @@ class InvoiceRepository
 
   def find_by(attribute, value)
     invoices.detect do |invoice|
-      invoice.send(attribute) == value
+      invoice.send(attribute).downcase == value.downcase
     end
   end
 
@@ -27,7 +27,7 @@ class InvoiceRepository
 
   def find_all_by(attribute, value)
     invoices.select do |invoice|
-      invoice.send(attribute) == value
+      invoice.send(attribute).downcase == value.downcase
     end
   end
 
