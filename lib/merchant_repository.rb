@@ -24,6 +24,7 @@ class MerchantRepository
 
   def find_by(attribute, value)
     merchants.detect do |merchant|
+      NoAttributeError.new(attribute) if !merchant.respond_to?(attribute)
       merchant.send(attribute) == value
     end
   end
@@ -35,6 +36,7 @@ class MerchantRepository
 
   def find_all_by(attribute, value)
     merchants.select do |merchant|
+      NoAttributeError.new(attribute) if !merchant.respond_to?(attribute)
       merchant.send(attribute) == value
     end
   end
@@ -47,4 +49,3 @@ class MerchantRepository
   attr_reader :merchants
 
 end
-  
