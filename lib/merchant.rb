@@ -8,7 +8,7 @@ class Merchant
   def initialize(row)
     @id         = row[:id]
     @name       = row[:name]
-    @created_at = Date.parse(row[:created_at]).strftime('%Y/%m/%d')
-    @updated_at = Date.parse(row[:updated_at]).strftime('%Y/%m/%d')
+    @created_at = row[:created_at]
+    @updated_at = row[:updated_at]
   end
 end
