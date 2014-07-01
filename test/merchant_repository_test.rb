@@ -32,6 +32,7 @@ class MerchantRepositoryTest < Minitest::Test
     repository = MerchantRepository.new
     result = repository.find_all_by_name('Williamson Group')
     assert 2, result.count
+    assert result
   end
 
 end

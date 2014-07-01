@@ -11,7 +11,7 @@ class MerchantRepository
   end
 
   def build_records(repository)
-    repository.each { |row| @merchants <<  Merchant.new(row) }
+    @merchants = repository.map { |row| Merchant.new(row)}
   end
 
   def random
@@ -33,21 +33,6 @@ class MerchantRepository
     find_by('name', value)
   end
 
-  def find_by_id(value)
-    find_by('id', value)
-  end
-
-  def find_by_created_at(value)
-    # need to figure out how to convert to the date/time in the csv
-    formatted_date = Date.parse(value).strftime('%Y/%m/%d')
-    find_by('created_at', formatted_date)
-  end
-
-  def find_by_updated_at(value)
-    formatted_date = Date.parse(value).strftime('%Y/%m/%d')
-    find_by('updated_at', formatted_date)
-  end
-
   def find_all_by(attribute, value)
     merchants.select do |merchant|
       merchant.send(attribute) == value
@@ -58,16 +43,8 @@ class MerchantRepository
     find_all_by('name', value)
   end
 
-  def find_all_by_created_at(value)
-    formatted_date = Date.parse(value).strftime('%Y/%m/%d')
-    find_all_by('created_at', formatted_date)
-  end
-
-  def find_all_by_updated_at(value)
-    formatted_date = Date.parse(value).strftime('%Y/%m/%d')
-    find_all_by('updated_at', formatted_date)
-  end
-
   private
   attr_reader :merchants
+
 end
+  
