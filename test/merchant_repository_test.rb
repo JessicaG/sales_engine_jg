@@ -29,22 +29,4 @@ class MerchantRepositoryTest < Minitest::Test
     assert result.name, 'Schroeder-Jerde'
   end
 
-  def test_it_can_find_a_created_at_date
-    repository = MerchantRepository.new
-    result = repository.find_by_created_at('April 21 2012')
-    assert '2012/04/21', result.created_at
-  end
-
-  def test_it_can_find_all_by_name
-    repository = MerchantRepository.new
-    result = repository.find_all_by_name('Williamson Group')
-    assert 2, result.count
-  end
-
-  def test_it_can_find_all_by_created_at
-    repository = MerchantRepository.new
-    result = repository.find_all_by_created_at('March 27 2012')
-    assert result.count > 4
-  end
-
 end
