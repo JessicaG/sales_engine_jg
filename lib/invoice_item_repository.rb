@@ -38,4 +38,5 @@ class InvoiceItemRepository
 
   private
   attr_reader :invoice_items
+  
 end

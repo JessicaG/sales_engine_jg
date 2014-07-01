@@ -5,6 +5,7 @@ require 'csv'
 require 'pry'
 
 class InvoiceItemTest < Minitest::Test
+  
   def repository
     @repository ||= InvoiceItemRepository.new
   end

@@ -1,6 +1,8 @@
 require_relative 'customer'
 require 'date'
+
 class CustomerRepository
+
   def initialize
     @customer_repository = CSV.open(
     './test/fixtures/customers.csv', headers: true, header_converters: :symbol)
@@ -53,7 +55,7 @@ class CustomerRepository
     find_all_by('last_name', value)
   end
 
-
   private
   attr_reader :customers
+
 end

@@ -4,8 +4,11 @@ require_relative '../lib/sales_engine'
 require 'pry'
 
 class SalesEngineTest < Minitest::Test
+  def setup
+    @engine ||= SalesEngine.new
+  end
+
   def test_it_exists
-    engine = SalesEngine.new
     assert engine
   end
 
@@ -16,12 +19,10 @@ class SalesEngineTest < Minitest::Test
   # end
 
   def test_it_loads_the_files
-    engine = SalesEngine.new
     assert engine.startup
   end
 
   def test_repositories_exist
-    engine = SalesEngine.new
     engine.startup
     assert engine.merchant_repository
     assert engine.invoice_repository

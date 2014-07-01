@@ -12,11 +12,11 @@ class SalesEngine
 
   def startup
     @merchant_repository      = MerchantRepository.new
-    # @customer_repository      = CustomerRepository.new
-    # @invoice_repository       = InvoiceRepository.new
-    # @invoice_item_repository  = InvoiceItemRepository.new
-    # @item_repository          = ItemRepository.new
-    # @transaction_repository   = TransactionRepository.new
+    @customer_repository      = CustomerRepository.new
+    @invoice_repository       = InvoiceRepository.new
+    @invoice_item_repository  = InvoiceItemRepository.new
+    @item_repository          = ItemRepository.new
+    @transaction_repository   = TransactionRepository.new
   end
 
 end

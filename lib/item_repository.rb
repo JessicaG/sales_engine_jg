@@ -1,6 +1,8 @@
 require './lib/item'
 require 'date'
+
 class ItemRepository
+
   def initialize
     @item_repository = CSV.open(
     './test/fixtures/items.csv', headers: true, header_converters: :symbol)
@@ -48,4 +50,5 @@ class ItemRepository
 
   private
   attr_reader :items
+  
 end

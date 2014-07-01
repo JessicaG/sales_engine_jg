@@ -4,6 +4,7 @@ require './lib/invoice_repository'
 require 'csv'
 
 class InvoiceTest < Minitest::Test
+  
   def setup
     @invoice_repository = InvoiceRepository.new
   end
