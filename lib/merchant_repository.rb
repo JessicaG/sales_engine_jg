@@ -2,7 +2,7 @@ require_relative 'merchant'
 require 'date'
 
 class MerchantRepository
-
+  attr_reader :engine
   def initialize(engine)
     @engine              = engine
     @merchants           = []
@@ -16,7 +16,7 @@ class MerchantRepository
   end
 
   def random
-    merchants.shuffle.pop
+    merchants.sample
   end
 
   def count
@@ -46,7 +46,10 @@ class MerchantRepository
     find_all_by('name', value)
   end
 
-  private
+  def items
+    
+  end
+
   attr_reader :merchants
 
 end

@@ -48,6 +48,13 @@ class ItemRepository
   def find_all_by_name(value)
     find_all_by('name', value)
   end
+  # items returns a collection of Item instances associated with that merchant
+  # for the products they sell
+  def find_items_by_merchant_name(merchant_name)
+    # find the merchant_id by name
+    merchant_id = self.engine.merchant_repository.find_by_name(merchant_name)
+    items.find_by_all('merchant_id', merchant_id)
+  end
 
   private
   attr_reader :items

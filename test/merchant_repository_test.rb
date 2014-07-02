@@ -8,11 +8,7 @@ require 'pry'
 class MerchantRepositoryTest < Minitest::Test
 
   def repository
-    @repository ||= MerchantRepository.new
-  end
-
-  def test_it_exists
-    assert repository
+    @repository ||= MerchantRepository.new('engine')
   end
 
   def test_it_has_more_than_nine_merchants
@@ -33,6 +29,19 @@ class MerchantRepositoryTest < Minitest::Test
     result = repository.find_all_by_name('Williamson Group')
     assert 2, result.count
     assert result
+  end
+
+  def test_it_can_talk_to_the_merchant
+    assert repository, repository.random.repository
+  end
+
+
+  
+
+  def test_it_can_find_items_by_merchant_id
+    merchant_id = repository.find_by_name('Schroeder-Jerde').id
+    # hey engine do you have a repository for items?
+    # there is no sales engine instance :)
   end
 
 end

@@ -30,6 +30,13 @@ class SalesEngineTest < Minitest::Test
     assert engine.transaction_repository
   end
 
+  def test_it_can_talk_to_the_repository
+    engine.startup
+    merchant_repository = engine.merchant_repository
+    assert_equal merchant_repository.engine, engine
+  end
+
+
   # def test_it_loads_a_file
   #   engine = SalesEngine.new
   #   filename = "./test/fixtures/merchants.csv"

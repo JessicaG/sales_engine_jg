@@ -27,4 +27,8 @@ class ItemRepositoryTest < Minitest::Test
     assert result
   end
 
+  def test_it_can_find_items_with_a_merchant_id
+    assert 5, repository.find_items_by_merchant_name('Schroeder-Jerde')
+  end
+
 end
