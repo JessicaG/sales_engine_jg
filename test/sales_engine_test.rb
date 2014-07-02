@@ -5,7 +5,7 @@ require_relative '../lib/invoice_repository'
 require_relative '../lib/item_repository'
 require_relative '../lib/invoice_item_repository'
 require_relative '../lib/merchant_repository'
-# require_relative '../lib/transactions_repository'
+require_relative '../lib/transaction_repository'
 require_relative '../lib/sales_engine'
 require 'pry'
 
@@ -27,7 +27,7 @@ class SalesEngineTest < Minitest::Test
     assert engine.item_repository
     assert engine.invoice_item_repository
     assert engine.customer_repository
-    # assert engine.transactions_repository
+    assert engine.transaction_repository
   end
 
   # def test_it_loads_a_file

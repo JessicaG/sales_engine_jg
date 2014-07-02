@@ -7,7 +7,7 @@ class Merchant
               :updated_at,
               :repository
 
-  def initialize(row)
+  def initialize(row, repository)
     @id         = row[:id]
     @name       = row[:name]
     @created_at = row[:created_at]

@@ -9,7 +9,8 @@ require_relative 'item_repository'
 require_relative 'item'
 require_relative 'invoice_item_repository'
 require_relative 'invoice_item'
-# require_relative './transactions_repository'
+require_relative 'transaction_repository'
+require_relative 'transaction'
 
 class SalesEngine
   attr_reader :customer_repository,
@@ -17,18 +18,16 @@ class SalesEngine
               :customer_repository,
               :invoice_repository,
               :invoice_item_repository,
-              :item_repository
-              # :transaction_repository
+              :item_repository,
+              :transaction_repository
 
   def startup
-    @merchant_repository      = MerchantRepository.new
-    @customer_repository      = CustomerRepository.new
-    @invoice_repository       = InvoiceRepository.new
-    @invoice_item_repository  = InvoiceItemRepository.new
-    @item_repository          = ItemRepository.new
-
-    # @transaction_repository   = TransactionRepository.new
+    @merchant_repository      = MerchantRepository.new(self)
+    @customer_repository      = CustomerRepository.new(self)
+    @invoice_repository       = InvoiceRepository.new(self)
+    @invoice_item_repository  = InvoiceItemRepository.new(self)
+    @item_repository          = ItemRepository.new(self)
+    @transaction_repository   = TransactionRepository.new(self)
   end
-
 
 end

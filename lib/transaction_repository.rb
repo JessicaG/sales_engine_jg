@@ -1,8 +1,9 @@
 class TransactionRepository
-  def initialize
+  def initialize(engine)
+    @engine                 = engine
+    @transactions           = []
     @transaction_repository = CSV.open(
     './test/fixtures/transactions.csv', headers: true, header_converters: :symbol)
-    @transactions = []
     build_records(@transaction_repository)
   end
 

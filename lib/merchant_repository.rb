@@ -3,10 +3,11 @@ require 'date'
 
 class MerchantRepository
 
-  def initialize
+  def initialize(engine)
+    @engine              = engine
+    @merchants           = []
     @merchant_repository = CSV.open(
     './test/fixtures/merchants.csv', headers: true, header_converters: :symbol)
-    @merchants = []
     build_records(@merchant_repository)
   end
 

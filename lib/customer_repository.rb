@@ -3,10 +3,11 @@ require 'date'
 
 class CustomerRepository
 
-  def initialize
+  def initialize(engine)
+    @engine              = engine
+    @customers           = []
     @customer_repository = CSV.open(
     './test/fixtures/customers.csv', headers: true, header_converters: :symbol)
-    @customers = []
     build_records(@customer_repository)
   end
 
