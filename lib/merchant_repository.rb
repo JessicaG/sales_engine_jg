@@ -11,7 +11,7 @@ class MerchantRepository
   end
 
   def build_records(repository)
-    @merchants = repository.map { |row| Merchant.new(row)}
+    @merchants = repository.map { |row| Merchant.new(row, self)}
   end
 
   def random

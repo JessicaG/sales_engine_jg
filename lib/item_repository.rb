@@ -11,7 +11,7 @@ class ItemRepository
   end
 
   def build_records(repository)
-    @items = repository.map { |row| Item.new(row) }
+    @items = repository.map { |row| Item.new(row, self) }
   end
 
   def random
@@ -50,5 +50,5 @@ class ItemRepository
 
   private
   attr_reader :items
-  
+
 end

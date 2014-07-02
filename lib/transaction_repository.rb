@@ -7,7 +7,7 @@ class TransactionRepository
   end
 
   def build_records(repository)
-    @transactions = repository.map { |row| Transaction.new(row) }
+    @transactions = repository.map { |row| Transaction.new(row, self) }
   end
 
   def random

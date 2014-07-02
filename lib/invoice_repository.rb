@@ -11,7 +11,7 @@ class InvoiceRepository
   end
 
   def build_records(repository)
-    @invoices = repository.map { |row| Invoice.new(row) }
+    @invoices = repository.map { |row| Invoice.new(row, self) }
   end
 
   def find_by(attribute, value)

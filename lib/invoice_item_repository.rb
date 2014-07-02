@@ -11,7 +11,7 @@ class InvoiceItemRepository
   end
 
   def build_records(repository)
-    @invoice_items = repository.map { |row| InvoiceItem.new(row) }
+    @invoice_items = repository.map { |row| InvoiceItem.new(row, self) }
   end
 
   def find_by(attribute, value)
@@ -38,5 +38,5 @@ class InvoiceItemRepository
 
   private
   attr_reader :invoice_items
-  
+
 end

@@ -11,7 +11,7 @@ class CustomerRepository
   end
 
   def build_records(repository)
-    @customers = repository.map { |row| Customer.new(row) }
+    @customers = repository.map { |row| Customer.new(row, self) }
   end
 
   def random

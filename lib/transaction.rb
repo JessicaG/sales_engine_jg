@@ -6,9 +6,10 @@ class Transaction
               :expiration_date,
               :result,
               :created_at,
-              :update_at
+              :update_at,
+              :repository
 
-  def initialize(row)
+  def initialize(row, repository)
     @id                 = row[:id]
     @invoice_items      = row[:invoice_items]
     @credit_card_number = row[:credit_card_number]
@@ -17,6 +18,7 @@ class Transaction
     @result             = row[:result]
     @created_at         = row[:created_at]
     @update_at          = row[:update_at]
+    @repository         = repository
   end
 
 end
