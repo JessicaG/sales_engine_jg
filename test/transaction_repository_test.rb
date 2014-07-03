@@ -1,7 +1,6 @@
 require './test/test_helper'
-require './lib/transaction'
-require './lib/transaction_repository'
 require 'csv'
+
 class TransactionRepositoryTest < Minitest::Test
   def test_it_has_more_than_nine_items
     repository = TransactionRepository.new

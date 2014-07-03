@@ -20,5 +20,5 @@ class Transaction
     @update_at          = row[:update_at]
     @repository         = repository
   end
-# id,invoice_id,credit_card_number,credit_card_expiration_date,result,created_at,updated_at
+  
 end

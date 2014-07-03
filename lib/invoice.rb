@@ -19,7 +19,6 @@ class Invoice
   end
 
   def transactions
-    binding.pry
     invoice = self.id
     repository.engine.transaction_repository.find_all_by('invoice_id', invoice)
   end

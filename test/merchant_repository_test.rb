@@ -1,9 +1,5 @@
 require_relative 'test_helper'
-require './lib/merchant_repository'
-require './lib/merchant'
-require './lib/no_attribute_error'
 require 'csv'
-require 'pry'
 
 class MerchantRepositoryTest < Minitest::Test
 
@@ -21,7 +17,7 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_it_finds_single_merchant_by_attribute
-    result = repository.find_by_name('Schroeder-Jerde') 
+    result = repository.find_by_name('Schroeder-Jerde')
     assert result
   end
 

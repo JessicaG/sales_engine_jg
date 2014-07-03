@@ -1,13 +1,5 @@
 require 'csv'
-require_relative 'test_helper'
-require_relative '../lib/customer_repository'
-require_relative '../lib/invoice_repository'
-require_relative '../lib/item_repository'
-require_relative '../lib/invoice_item_repository'
-require_relative '../lib/merchant_repository'
-require_relative '../lib/transaction_repository'
-require_relative '../lib/sales_engine'
-require 'pry'
+require './test/test_helper'
 
 class SalesEngineTest < Minitest::Test
   attr_reader :engine

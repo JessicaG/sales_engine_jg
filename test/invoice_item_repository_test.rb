@@ -1,11 +1,8 @@
 require_relative 'test_helper'
-require './lib/invoice_item_repository'
-require './lib/invoice_item'
 require 'csv'
-require 'pry'
 
 class InvoiceItemTest < Minitest::Test
-  
+
   def repository
     @repository ||= InvoiceItemRepository.new
   end

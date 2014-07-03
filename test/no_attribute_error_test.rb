@@ -1,6 +1,4 @@
 require './test/test_helper'
-require './lib/no_attribute_error'
-require './lib/merchant'
 
 class NoAttributeErrorTest < Minitest::Test
 

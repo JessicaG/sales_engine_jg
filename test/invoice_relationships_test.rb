@@ -1,16 +1,4 @@
-require_relative 'test_helper'
-require './lib/sales_engine'
-require './lib/invoice'
-require './lib/invoice_repository'
-require './lib/invoice_item_repository'
-require './lib/invoice_item'
-require './lib/customer'
-require './lib/customer_repository'
-require './lib/merchant'
-require './lib/merchant_repository'
-require './lib/transaction'
-require './lib/transaction_repository'
-require './lib/no_attribute_error'
+require './test/test_helper'
 
 class InvoiceRelationsTest <Minitest::Test
   attr_reader :engine
