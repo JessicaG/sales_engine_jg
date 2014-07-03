@@ -2,6 +2,8 @@ require_relative 'invoice'
 require 'pry'
 
 class InvoiceRepository
+  attr_reader :engine,
+              :invoices
 
   def initialize(engine)
     @engine             = engine
@@ -17,6 +19,7 @@ class InvoiceRepository
 
   def find_by(attribute, value)
     invoices.detect do |invoice|
+      NoAttributeError.new(attribute) if !invoice.respond_to?(attribute)
       invoice.send(attribute).downcase == value.downcase
     end
   end
@@ -28,6 +31,7 @@ class InvoiceRepository
 
   def find_all_by(attribute, value)
     invoices.select do |invoice|
+      NoAttributeError.new(attribute) if !invoice.respond_to?(attribute)
       invoice.send(attribute).downcase == value.downcase
     end
   end
@@ -41,7 +45,10 @@ class InvoiceRepository
     find_all_by('id', value)
   end
 
-  private
-  attr_reader :invoices
+  def find_by_id(value)
+    find_by('id', value)
+  end
+
+
 
 end

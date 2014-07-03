@@ -1,6 +1,6 @@
 class Transaction
   attr_reader :id,
-              :invoice_items,
+              :invoice_id,
               :credit_card_number,
               :credit_card,
               :expiration_date,
@@ -11,7 +11,7 @@ class Transaction
 
   def initialize(row, repository)
     @id                 = row[:id]
-    @invoice_items      = row[:invoice_items]
+    @invoice_id         = row[:invoice_id]
     @credit_card_number = row[:credit_card_number]
     @credit_card        = row[:credit_card]
     @expiration_date    = row[:expiration_date]
@@ -20,5 +20,5 @@ class Transaction
     @update_at          = row[:update_at]
     @repository         = repository
   end
-
+# id,invoice_id,credit_card_number,credit_card_expiration_date,result,created_at,updated_at
 end

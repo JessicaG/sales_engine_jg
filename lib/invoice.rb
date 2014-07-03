@@ -18,4 +18,10 @@ class Invoice
     @repository     = repository
   end
 
+  def transactions
+    binding.pry
+    invoice = self.id
+    repository.engine.transaction_repository.find_all_by('invoice_id', invoice)
+  end
+
 end

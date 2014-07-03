@@ -36,11 +36,4 @@ class SalesEngineTest < Minitest::Test
     assert_equal merchant_repository.engine, engine
   end
 
-
-  # def test_it_loads_a_file
-  #   engine = SalesEngine.new
-  #   filename = "./test/fixtures/merchants.csv"
-  #   assert engine.startup(filename)
-  # end
-
 end

@@ -21,7 +21,7 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_it_finds_single_merchant_by_attribute
-    result = repository.find_by_name('Schroeder-Jerde') # returns an object with the name of "Schorder-Jerde"
+    result = repository.find_by_name('Schroeder-Jerde') 
     assert result
   end
 
@@ -34,14 +34,4 @@ class MerchantRepositoryTest < Minitest::Test
   def test_it_can_talk_to_the_merchant
     assert repository, repository.random.repository
   end
-
-
-  
-
-  def test_it_can_find_items_by_merchant_id
-    merchant_id = repository.find_by_name('Schroeder-Jerde').id
-    # hey engine do you have a repository for items?
-    # there is no sales engine instance :)
-  end
-
 end

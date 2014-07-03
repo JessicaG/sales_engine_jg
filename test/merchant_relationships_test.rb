@@ -16,18 +16,8 @@ class MerchantRelationshipsTest < Minitest::Test
     merchant = engine.merchant_repository.find_by_name('Schroeder-Jerde')
     items = merchant.items
     assert 5, items.count
-    # this is an integration test......move it later
-    # this should return 5 items
-    # merchant_id = merchant_repository.find_by_name('Schroeder-Jerde').id
-    # # how do we talk to our sales engine
-    # # there is an instance attribute called engine
-    # #heyyyyy engine do you have a repo for items?
-    # items = engine.item_repository.find_all_by('merchant_id', merchant_id)
-    # assert 5, items.count
   end
 
-  #invoices returns a collection of Invoice instances associated with that
-  # merchant from their known orders
   def test_it_can_return_invoices_by_merchant_name
     merchant = engine.merchant_repository.find_by_name('Schroeder-Jerde')
     invoices = merchant.invoices
