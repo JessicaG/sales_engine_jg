@@ -6,8 +6,7 @@ class CustomerRepository
   def initialize(engine)
     @engine              = engine
     @customers           = []
-    @customer_repository = CSV.open(
-    './test/fixtures/customers.csv', headers: true, header_converters: :symbol)
+    @customer_repository = CSV.open(csv_dir 'customers.csv', headers: true, header_converters: :symbol)
     build_records(@customer_repository)
   end
 

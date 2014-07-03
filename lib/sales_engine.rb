@@ -21,13 +21,13 @@ class SalesEngine
               :item_repository,
               :transaction_repository
 
-  def startup
-    @merchant_repository      = MerchantRepository.new(self)
-    @customer_repository      = CustomerRepository.new(self)
-    @invoice_repository       = InvoiceRepository.new(self)
-    @invoice_item_repository  = InvoiceItemRepository.new(self)
-    @item_repository          = ItemRepository.new(self)
-    @transaction_repository   = TransactionRepository.new(self)
+  def startup(self, csv_dir './test/fixtures')
+    @merchant_repository      = MerchantRepository.new(self, csv_dir)
+    @customer_repository      = CustomerRepository.new(self, csv_dir)
+    @invoice_repository       = InvoiceRepository.new(self, csv_dir)
+    @invoice_item_repository  = InvoiceItemRepository.new(self, csv_dir)
+    @item_repository          = ItemRepository.new(self, csv_dir)
+    @transaction_repository   = TransactionRepository.new(self, csv_dir)
   end
 
 end
