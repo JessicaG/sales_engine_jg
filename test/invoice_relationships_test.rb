@@ -26,7 +26,6 @@ class InvoiceRelationsTest <Minitest::Test
   end
 
   def test_invoice_returns_associated_invoice_items
-
     engine.invoice.item_repository
 
     #matching the arrays from invoice items to items
@@ -35,9 +34,11 @@ class InvoiceRelationsTest <Minitest::Test
   end
 
   def test_item_returns_a_colleciton_of_associated_items
+    item =
     #invoice has invoice items, take collection and map all items invoice.items.map & item
     invoice.invoice_items.map(&:item) #is the same as this invoice.invoice_items.map { |i| i.item }
   end
+
 
 end
 
