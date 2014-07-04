@@ -40,12 +40,12 @@ class InvoiceRelationsTest <Minitest::Test
 
   end
 
-      describe "#customer" do
-      it "exists" do
-        invoice.customer.first_name.should == "Eric"
-        invoice.customer.last_name.should  == "Bergnaum"
-      end
-    end
+    #   describe "#customer" do
+    #   it "exists" do
+    #     invoice.customer.first_name.should == "Eric"
+    #     invoice.customer.last_name.should  == "Bergnaum"
+    #   end
+    # end
   #
   # def test_item_returns_a_colleciton_of_associated_items
   #   item = engine.repository.item.find_all_by('4')
