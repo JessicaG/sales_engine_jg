@@ -1,16 +1,16 @@
 require 'csv'
-require_relative 'merchant_repository'
-require_relative 'merchant'
-require_relative 'customer_repository'
-require_relative 'customer'
-require_relative 'invoice_repository'
-require_relative 'invoice'
-require_relative 'item_repository'
-require_relative 'item'
-require_relative 'invoice_item_repository'
-require_relative 'invoice_item'
-require_relative 'transaction_repository'
-require_relative 'transaction'
+require './lib/merchant_repository'
+require './lib/merchant'
+require './lib/customer_repository'
+require './lib/customer'
+require './lib/invoice_repository'
+require './lib/invoice'
+require './lib/item_repository'
+require './lib/item'
+require './lib/invoice_item_repository'
+require './lib/invoice_item'
+require './lib/transaction_repository'
+require './lib/transaction'
 
 class SalesEngine
   attr_reader :customer_repository,
@@ -19,9 +19,14 @@ class SalesEngine
               :invoice_repository,
               :invoice_item_repository,
               :item_repository,
-              :transaction_repository
+              :transaction_repository,
+              :csv_dir
 
-  def startup(self, csv_dir './test/fixtures')
+  def initialize(csv_dir='./test/fixtures')
+    @csv_dir = csv_dir
+  end
+
+  def startup
     @merchant_repository      = MerchantRepository.new(self, csv_dir)
     @customer_repository      = CustomerRepository.new(self, csv_dir)
     @invoice_repository       = InvoiceRepository.new(self, csv_dir)

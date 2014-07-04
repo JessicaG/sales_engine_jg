@@ -3,10 +3,10 @@ require 'date'
 
 class ItemRepository
 
-  def initialize(engine)
+  def initialize(engine, csv_dir)
     @engine          = engine
     @items           = []
-    @item_repository = CSV.open(csv_dir 'items.csv', headers: true, header_converters: :symbol)
+    @item_repository = CSV.open(csv_dir + '/items.csv', headers: true, header_converters: :symbol)
     build_records(@item_repository)
   end
 

@@ -3,10 +3,10 @@ require 'pry'
 
 class InvoiceItemRepository
 
-  def initialize(engine)
+  def initialize(engine, csv_dir)
     @engine                  = engine
     @invoice_items           = []
-    @invoice_item_repository = CSV.open(csv_dir 'invoice_items.csv', headers: true, header_converters: :symbol)
+    @invoice_item_repository = CSV.open(csv_dir + '/invoice_items.csv', headers: true, header_converters: :symbol)
     build_records(@invoice_item_repository)
   end
 

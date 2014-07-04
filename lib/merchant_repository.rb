@@ -1,12 +1,12 @@
-require_relative 'merchant'
+require './lib/merchant'
 require 'date'
 
 class MerchantRepository
   attr_reader :engine
-  def initialize(engine)
+  def initialize(engine, csv_dir)
     @engine              = engine
     @merchants           = []
-    @merchant_repository = CSV.open(csv_dir 'merchants.csv', headers: true, header_converters: :symbol)
+    @merchant_repository = CSV.open(csv_dir + '/merchants.csv', headers: true, header_converters: :symbol)
     build_records(@merchant_repository)
   end
 
