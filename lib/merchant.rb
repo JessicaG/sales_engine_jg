@@ -18,7 +18,7 @@ class Merchant
 
   def items
     merchant_id = self.id
-    repository.engine.item_repository.find_by('merchant_id', merchant_id)
+    repository.engine.item_repository.find_all_by('merchant_id', merchant_id)
   end
 
   def invoices
