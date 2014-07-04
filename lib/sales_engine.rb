@@ -1,16 +1,5 @@
 require 'csv'
-require './lib/merchant_repository'
-require './lib/merchant'
-require './lib/customer_repository'
-require './lib/customer'
-require './lib/invoice_repository'
-require './lib/invoice'
-require './lib/item_repository'
-require './lib/item'
-require './lib/invoice_item_repository'
-require './lib/invoice_item'
-require './lib/transaction_repository'
-require './lib/transaction'
+require './test/test_helper'
 
 class SalesEngine
   attr_reader :customer_repository,

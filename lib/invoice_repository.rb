@@ -1,5 +1,4 @@
-require_relative 'invoice'
-require 'pry'
+require './lib/invoice'
 
 class InvoiceRepository
   attr_reader :engine,

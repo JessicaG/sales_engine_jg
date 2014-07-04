@@ -45,10 +45,6 @@ class MerchantRepository
     find_all_by('name', value)
   end
 
-  def items
-
-  end
-
   attr_reader :merchants
 
 end

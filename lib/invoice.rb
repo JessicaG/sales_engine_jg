@@ -23,9 +23,9 @@ class Invoice
     repository.engine.transaction_repository.find_all_by('invoice_id', invoice)
   end
 
-  def items
-    invoice = self.id
-    repository.engine.invoice_item_repository.find_all_by('invoice_item_id', invoice)
-  end
+  # def items
+  #   invoice = self.id
+  #   repository.engine.invoice_item_repository.find_all_by('invoice_item_id', invoice)
+  # end
 
 end

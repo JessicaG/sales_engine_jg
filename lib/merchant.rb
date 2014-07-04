@@ -1,5 +1,4 @@
 require 'date'
-require 'pry'
 
 class Merchant
   attr_reader :id,

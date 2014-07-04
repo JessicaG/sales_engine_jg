@@ -1,5 +1,4 @@
-require_relative 'invoice_item'
-require 'pry'
+require './lib/invoice_item'
 
 class InvoiceItemRepository
 
@@ -36,6 +35,13 @@ class InvoiceItemRepository
     find_by('item_id', value)
   end
 
+  def find_all_by(attribute, value)
+    invoice_items.select do |invoice_item|
+      NoAttributeError.new(attribute) if !invoice_item.respond_to?(attribute)
+      invoice_item.send(attribute).downcase == value.downcase
+    end
+  end
+  
   private
   attr_reader :invoice_items
 
