@@ -36,9 +36,10 @@ class InvoiceRelationsTest <Minitest::Test
 
   # merchant returns an instance of Merchant associated with this object
   def test_invoice_returns_associated_merchants
-    invoice = engine.merchant_repository.find_by_name('Schroeder-Jerde')
+    # this returns a merchant associated with the id 1
+    invoice = engine.invoice_repository.find_by('merchant_id', '1')
     merchant = invoice.merchant
-    assert ['1', '6', '9'], invoice.merchant.map(&:merchant_id)
+    assert ['1', '6', '9'], invoice.merchant
   end
 
 end

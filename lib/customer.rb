@@ -7,6 +7,7 @@ class Customer
               :created_at,
               :update_at,
               :repository
+              
   def initialize(row, repository)
     @id          = row[:id]
     @first_name  = row[:first_name]
@@ -20,7 +21,7 @@ class Customer
     customer = self.id
     #this will return an instance object of first_name Joey and assign his id to customer
     repository.engine.invoice_repository.find_all_by('customer_id', customer)
-    
+
   end
 
 end

@@ -10,7 +10,7 @@ class Invoice
 
   def initialize(row, repository)
     @id             = row[:id]
-    @cusomter_id    = row[:customer_id]
+    @customer_id    = row[:customer_id]
     @merchant_id    = row[:merchant_id]
     @status         = row[:status]
     @created_at     = row[:created_at]
@@ -35,12 +35,12 @@ class Invoice
 
   def customers
     invoice = self.id
-    repository.engine.customer_repository.find_by('id', customer)
+    repository.engine.customer_repository.find_by('id', invoice)
   end
 
   def merchant
     invoice = self.id
-    repository.engine.merchant_repository.find_by('merchant_id', merchant)
+    repository.engine.merchant_repository.find_all_by('id', invoice)
   end
 
 end
