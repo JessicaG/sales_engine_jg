@@ -1,5 +1,6 @@
 class TransactionRepository
-
+  attr_reader :engine,
+              :transactions
   def initialize(engine, csv_dir)
     @engine                 = engine
     @transactions           = []
@@ -45,7 +46,5 @@ class TransactionRepository
     find_all_by('result', value)
   end
 
-  private
-  attr_reader :transactions
 
 end

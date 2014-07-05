@@ -10,7 +10,10 @@ class TransactionRelationshipsTest < Minitest::Test
 
   #invoice returns an instance of Invoice associated with this object
   def test_transcation_returns_associated_invoices
-    transaction = engine.transaction_repository.find_all_by('transaction_id', transaction_id)
-    invoice = transaction.invoices
-    assert [''], transaction.invoice.map(&:item)
+    transaction = engine.transaction_repository.find_by('invoice_id', '7')
+    # binding.pry
+    invoice = transaction.invoice
+    assert ['6'], transaction.invoice
+    # assert ['6'], transaction.invoice.map(&:invoice_id)
   end
+end

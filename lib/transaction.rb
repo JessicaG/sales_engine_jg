@@ -20,5 +20,11 @@ class Transaction
     @update_at          = row[:update_at]
     @repository         = repository
   end
-  
+
+  def invoice
+    transaction = self.id
+    repository.engine.invoice_repository.find_by('id', transaction)
+  end
+
+
 end
