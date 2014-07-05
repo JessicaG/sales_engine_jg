@@ -10,9 +10,9 @@ class CustomerRelationshipsTest < Minitest::Test
 
   #invoices returns a collection of Invoice instances associated with this object.
   def test_customer_returns_associated_invoices
-    customer = engine.customer_repository_find_by_name('bob')
+    customer = engine.customer_repository.find_by_first_name('Joey')
     invoices = customer.invoices
-    assert [''], customer.invoices.map(&:item)
+    assert ['1', '2', '3', '4', '5', '6', '7', '8'], customer.invoices.map.count(&:customer_id)
   end
 
 end

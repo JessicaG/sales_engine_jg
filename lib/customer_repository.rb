@@ -2,7 +2,8 @@ require_relative 'customer'
 require 'date'
 
 class CustomerRepository
-
+  attr_reader :engine,
+              :customers
   def initialize(engine, csv_dir)
     @engine              = engine
     @customers           = []
@@ -24,7 +25,8 @@ class CustomerRepository
 
   def find_by(attribute, value)
     customers.detect do |customer|
-      customer.send(attribute) == value
+      NoAttributeError.new(attribute) if !customer.respond_to?(attribute)
+      customer.send(attribute).to_s.downcase == value.to_s.downcase
     end
   end
 
@@ -43,7 +45,8 @@ class CustomerRepository
 
   def find_all_by(attribute, value)
     customers.select do |customer|
-      customer.send(attribute) == value
+      NoAttributeError.new(attribute) if !customer.respond_to?(attribute)
+      customer.send(attribute).to_s.downcase == value.to_s.downcase
     end
   end
 
@@ -55,7 +58,5 @@ class CustomerRepository
     find_all_by('last_name', value)
   end
 
-  private
-  attr_reader :customers
 
 end

@@ -16,4 +16,11 @@ class Customer
     @repository  = repository
   end
 
+  def invoices
+    customer = self.id
+    #this will return an instance object of first_name Joey and assign his id to customer
+    repository.engine.invoice_repository.find_all_by('customer_id', customer)
+    
+  end
+
 end
