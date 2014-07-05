@@ -4,6 +4,7 @@ require 'date'
 class CustomerRepository
   attr_reader :engine,
               :customers
+              
   def initialize(engine, csv_dir)
     @engine              = engine
     @customers           = []

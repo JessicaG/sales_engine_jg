@@ -3,6 +3,7 @@ require 'pry'
 
 class TransactionRelationshipsTest < Minitest::Test
   attr_reader :engine
+
   def setup
     @engine = SalesEngine.new
     engine.startup

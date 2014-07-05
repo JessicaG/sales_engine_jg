@@ -2,7 +2,8 @@ require './lib/invoice'
 
 class InvoiceRepository
   attr_reader :engine,
-              :invoices
+              :invoices,
+              :customers
 
   def initialize(engine, csv_dir)
     @engine             = engine

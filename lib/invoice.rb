@@ -23,9 +23,24 @@ class Invoice
     repository.engine.transaction_repository.find_all_by('invoice_id', invoice)
   end
 
-  # def items
-  #   invoice = self.id
-  #   repository.engine.invoice_item_repository.find_all_by('invoice_item_id', invoice)
-  # end
+  def invoice_items
+    invoice = self.id
+    repository.engine.invoice_item_repository.find_all_by('invoice_id', invoice)
+  end
+
+  def items
+    invoice = self.id
+    repository.engine.invoice_item_repository.find_all_by('item_id', invoice)
+  end
+
+  def customers
+    invoice = self.id
+    repository.engine.customer_repository.find_by('id', customer)
+  end
+
+  def merchant
+    invoice = self.id
+    repository.engine.merchant_repository.find_by('merchant_id', merchant)
+  end
 
 end
