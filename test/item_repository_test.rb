@@ -4,7 +4,8 @@ require 'csv'
 class ItemRepositoryTest < Minitest::Test
 
   def repository
-    @repository ||= ItemRepository.new
+    csv_dir='./test/fixtures'
+    @repository ||= ItemRepository.new(self, csv_dir)
   end
 
   def test_it_has_more_than_nine_items
@@ -27,7 +28,7 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_it_can_find_items_with_a_merchant_id
-    assert 5, repository.find_items_by_merchant_name('Schroeder-Jerde')
+    assert 5, repository.find_by_name('Schroeder-Jerde')
   end
 
 end

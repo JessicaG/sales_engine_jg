@@ -4,7 +4,8 @@ require 'csv'
 class CustomerRepositoryTest < Minitest::Test
 
   def repository
-    @repository ||= CustomerRepository.new
+    csv_dir='./test/fixtures'
+    @repository ||= CustomerRepository.new(self, csv_dir)
   end
 
   def test_it_has_more_than_nine_customers

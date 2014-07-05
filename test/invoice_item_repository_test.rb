@@ -4,7 +4,8 @@ require 'csv'
 class InvoiceItemTest < Minitest::Test
 
   def repository
-    @repository ||= InvoiceItemRepository.new
+    csv_dir='./test/fixtures'
+    @repository ||= InvoiceItemRepository.new(self, csv_dir)
   end
 
   def test_it_can_find_by_item_id

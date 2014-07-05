@@ -4,7 +4,8 @@ require 'csv'
 class MerchantRepositoryTest < Minitest::Test
 
   def repository
-    @repository ||= MerchantRepository.new('engine')
+    csv_dir='./test/fixtures'
+    @repository ||= MerchantRepository.new(self, csv_dir)
   end
 
   def test_it_has_more_than_nine_merchants
