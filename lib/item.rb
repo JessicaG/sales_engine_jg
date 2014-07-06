@@ -21,4 +21,14 @@ class Item
     @repository  = repository
   end
 
+  def invoice_items
+    item = self.id
+    repository.engine.invoice_item_repository.find_all_by('id', item)
+  end
+
+  def merchant
+    item = self.id
+    repository.engine.merchant_repository.find_by('id', item)
+  end
+
 end

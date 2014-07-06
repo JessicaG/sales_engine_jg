@@ -2,7 +2,8 @@ require './lib/item'
 require 'date'
 
 class ItemRepository
-
+  attr_reader :items,
+              :engine
   def initialize(engine, csv_dir)
     @engine          = engine
     @items           = []
@@ -47,8 +48,5 @@ class ItemRepository
   def find_all_by_name(value)
     find_all_by('name', value)
   end
-
-  private
-  attr_reader :items
 
 end
