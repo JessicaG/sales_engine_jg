@@ -25,4 +25,9 @@ class Merchant
     repository.engine.invoice_repository.find_all_by('merchant_id', merchant_id)
   end
 
+  def most_revenue(number)
+    # returns the top number of merchants that are passed in
+    # 
+  end
+
 end

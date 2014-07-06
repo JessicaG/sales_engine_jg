@@ -1,7 +1,8 @@
 require './lib/invoice_item'
 
 class InvoiceItemRepository
-
+  attr_reader :invoice_items,
+              :engine
   def initialize(engine, csv_dir)
     @engine                  = engine
     @invoice_items           = []
@@ -41,8 +42,7 @@ class InvoiceItemRepository
       invoice_item.send(attribute).downcase == value.downcase
     end
   end
-  
-  private
-  attr_reader :invoice_items
+
+
 
 end

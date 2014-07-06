@@ -9,7 +9,8 @@ class InvoiceItem
               :quantity,
               :unit_price,
               :created_at,
-              :updated_at
+              :updated_at,
+              :repository
 
   def initialize(row, repository)
     @id           = row[:id]
@@ -20,6 +21,16 @@ class InvoiceItem
     @created_at   = Date.parse(row[:updated_at]).to_s
     @updated_at   = Date.parse(row[:created_at]).to_s
     @repository   = repository
+  end
+
+  def invoice
+    invoice_item = self.id
+    repository.engine.invoice_repository.find_by('id', invoice_item)
+  end
+
+  def item
+    invoice_item = self.id
+    repository.engine.item_repository.find_by('id', invoice_item)
   end
 
   def price_format(price)
