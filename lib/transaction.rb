@@ -27,6 +27,5 @@ class Transaction
     transaction = self.id
     repository.engine.invoice_repository.find_by('id', transaction)
   end
-
-
+  
 end
