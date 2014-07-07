@@ -20,13 +20,10 @@ class MerchantRelationshipsTest < Minitest::Test
     assert ['Item Qui Esse'], items.collect.count(&:name)
   end
 
-  #revenue returns the total revenue for that merchant across all transactions
-  # def test_it_can_return_total_revenue_for_merchants_for_a_specific_date
-  #   merchant = engine.invoice_item_repository.find_all_by('item_id')
-  #   revenue = merchant.revenue
-  #   assert [''], revenue.collect.count(&:id)
-  #
-  #   revenue = engine.invoice_item_repository.find_all_by('item_id')
-  # end
+  def test_it_can_return_total_revenue_for_merchants_for_a_specific_date
+    merchant = engine.merchant_repository.find_by('name', 'Schroeder-Jerde')
+    revenue = merchant.revenue
+    assert 1080219, revenue
+  end
 
 end

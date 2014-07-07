@@ -25,8 +25,17 @@ class Merchant
     repository.engine.invoice_repository.find_all_by('merchant_id', merchant_id)
   end
 
-  # def revenue(date)
-    #returns the total revenue for that merchant across all transactions
-  # end
+  def revenue
+    merchant_id = self.id
+    invoices = repository.engine.invoice_repository.find_all_by('merchant_id', merchant_id)
+    transactions = invoices.map { |invoice| repository.engine.transaction_repository.find_all_by('invoice_id', invoice.id) }
+    .select { |transaction| transaction[0].result == 'success' }
+    invoice_items = transactions.map do |transaction|
+       repository.engine.invoice_item_repository.find_by('invoice_id', transaction[0].invoice_id)
+    end
+    revenue = invoice_items.map { |invoice_item| invoice_items[0].quantity * invoice_items[0].unit_price  }
+    .reduce(:+)
+  end
+
 
 end
