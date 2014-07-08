@@ -31,17 +31,17 @@ class Invoice
   end
 
   def items
-    # items returns a collection of associated Items by way of
-    # InvoiceItem objects
     invoice_id = self.id
     invoice_items = repository.engine.invoice_item_repository
     .find_all_by('invoice_id', invoice_id)
-    repository.engine.item_repository.find_all_by('item_id', invoice_items.first.id)
+    invoice_items.map do |invoice_item|
+      repository.engine.item_repository.find_by('id', invoice_item.item_id )
+    end
   end
 
-  def customers
-    invoice = self.id
-    repository.engine.customer_repository.find_by('id', invoice)
+  def customer
+    # customer returns an instance of Customer associated with this object
+    repository.engine.customer_repository.find_by('id', self.customer_id)
   end
 
   def merchant
