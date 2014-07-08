@@ -33,7 +33,6 @@ class InvoiceItemRepository
     end
   end
 
-
   def find_by_id(value)
     value
     find_by('id', value)
