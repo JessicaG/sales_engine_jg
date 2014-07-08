@@ -22,34 +22,32 @@ class Merchant
   end
 
   def invoices
-    merchant_id = self.id
-    repository.engine.invoice_repository.find_all_by('merchant_id', merchant_id)
+    repository.engine.invoice_repository.find_all_by('merchant_id', self.id)
   end
 
-  # def revenue
-  #   merchant_id = self.id
-  #   invoices
-  #   invoices = repository.engine.invoice_repository.find_all_by('merchant_id', merchant_id)
-  #   transactions = invoices.map { |invoice| repository.engine.transaction_repository.find_all_by('invoice_id', invoice.id) }
-  #   .select { |transaction| transaction[0].result == 'success' }
-  #   invoice_items = transactions.map do |transaction|
-  #      repository.engine.invoice_item_repository.find_by('invoice_id', transaction[0].invoice_id)
-  #   end
-  #   revenue = invoice_items.map { |invoice_item| invoice_items[0].quantity * invoice_items[0].unit_price  }
-  #   .reduce(:+)
-  # end
+  def revenue
+    paid_invoices
+    total_revenue = paid_invoices.reduce(0)
+    # { |sum, paid_invoice| sum += paid_invoice.total_price }
+    to_bigdecimal(total_revenue)
+  end
 
-  def successful_charge
+  def to_bigdecimal(cents)
+    x = cents.to_f / 100
+    BigDecimal.new(x.to_s)
+  end
+
+  def paid_invoices
     invoices.select(&:successful_charge?)
   end
-
-  def revenue(date= nil)
-    invoices = successful_charge
-    if date
-      invoices = invoices.find_all { |invoice| invoice.updated_at == date }
-    end
-    invoices.collect(&:amount).reduce(0, :+)
-
-  end
+  #
+  # def revenue(date= nil)
+  #   invoices = successful_charge
+  #   if date
+  #     invoices = invoices.find_all { |invoice| invoice.updated_at == date }
+  #   end
+  #   invoices.collect(&:amount).reduce(0, :+)
+  #
+  # end
 
 end

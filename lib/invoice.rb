@@ -53,8 +53,15 @@ class Invoice
     repository.engine.transaction_repository.transactions.any?(&:successful?)
   end
 
-  def amount
-    repository.engine.invoice_item_repository.invoice_items.collect(&:total_price).reduce(0, :+)
+  def invoice_amount
+    cents = invoice_items.reduce(0) { |sum , invoice_item | sum += invoice_item.total_price }
+    # binding.pry
+    to_bigdecimal(cents)
+  end
+
+  def to_bigdecimal(cents)
+    x = cents.to_f / 100
+    BigDecimal.new(x.to_s)
   end
 
 end

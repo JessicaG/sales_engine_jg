@@ -24,14 +24,15 @@ class MerchantRelationshipsTest < Minitest::Test
   def test_it_can_return_total_revenue_for_merchants
     merchant = engine.merchant_repository.find_by('name', 'Schroeder-Jerde')
     revenue = merchant.revenue
-    assert BigDecimal.new('2549722.91'), revenue
+    assert_equal 1080219, revenue
   end
 
   def test_it_can_return_revenue_for_merchants_by_date
+    skip
     merchant = engine.merchant_repository.find_by('name', 'Schroeder-Jerde')
     revenue = merchant.revenue
     date = Date.parse "Tue, 20 Mar 2012"
-    assert BigDecimal.new('2549722.91'), revenue
+    assert_equal BigDecimal.new(''), revenue
   end
 
 end
