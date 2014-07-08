@@ -1,8 +1,9 @@
-require './test/test_helper'
+require_relative './test/test_helper'
 require 'pry'
 
 class MerchantRelationshipsTest < Minitest::Test
   attr_reader :engine
+
   def setup
     @engine = SalesEngine.new
     engine.startup
@@ -20,10 +21,13 @@ class MerchantRelationshipsTest < Minitest::Test
     assert ['Item Qui Esse'], items.collect.count(&:name)
   end
 
-  def test_it_can_return_total_revenue_for_merchants_for_a_specific_date
+  def test_it_can_return_total_revenue_for_merchants
     merchant = engine.merchant_repository.find_by('name', 'Schroeder-Jerde')
     revenue = merchant.revenue
     assert 1080219, revenue
   end
+
+  def test_it_can_
+    #revenue(date) returns the total revenue for that merchant for a specific invoice date
 
 end

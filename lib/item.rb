@@ -11,11 +11,11 @@ class Item
               :repository
 
   def initialize(row, repository)
-    @id          = row[:id]
+    @id          = row[:id].to_i
     @name        = row[:name]
     @description = row[:description]
-    @unit_price  = row[:unit_price]
-    @merchant_id = row[:merchant_id]
+    @unit_price  = row[:unit_price].to_i
+    @merchant_id = row[:merchant_id].to_i
     @created_at  = Date.parse(row[:updated_at]).to_s
     @updated_at  = Date.parse(row[:created_at]).to_s
     @repository  = repository

@@ -1,12 +1,14 @@
-require './lib/merchant'
+require_relative 'merchant'
 require 'date'
 
 class MerchantRepository
-  attr_reader :engine
+  attr_reader :engine,
+              :merchants
+
   def initialize(engine, csv_dir)
     @engine              = engine
     @merchants           = []
-    @merchant_repository = CSV.open(csv_dir + '/merchants.csv', headers: true, header_converters: :symbol)
+    @merchant_repository ||= CSV.open(csv_dir + '/merchants.csv', headers: true, header_converters: :symbol)
     build_records(@merchant_repository)
   end
 
@@ -45,7 +47,14 @@ class MerchantRepository
     find_all_by('name', value)
   end
 
-  
-  attr_reader :merchants
+  def all
+    merchants
+  end
+
+  def most_revenue(value)
+    0
+  end
+
+
 
 end

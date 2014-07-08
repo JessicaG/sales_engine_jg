@@ -15,4 +15,10 @@ class CustomerRelationshipsTest < Minitest::Test
     assert ['1', '2', '3', '4', '5', '6', '7', '8'], customer.invoices.map.count(&:customer_id)
   end
 
+  def test_invoices_can_return_a_single_customer_id_that_is_an_integer
+    customer = engine.customer_repository.find_by_id('3')
+    invoices = customer.invoices
+    assert_equal 3, invoices
+  end
+
 end

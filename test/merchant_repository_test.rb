@@ -31,4 +31,24 @@ class MerchantRepositoryTest < Minitest::Test
   def test_it_can_talk_to_the_merchant
     assert repository, repository.random.repository
   end
+
+  def test_it_can_return_all_merchants
+    assert 10, repository.all.count
+  end
+
+  def test_most_revenue_is_zero
+    assert 0, repository.most_revenue(0)
+  end
+
+  def test_most_revenue_returns_a_single_result
+    # what algorithim do we use to find the merchant with the highest revenue?
+    # we can reuse the revenue method on the merchant
+    # find all merchants, sort by revenue, last
+
+    #repository.all.sort_by { |merchant| merchant.revenue }.reverse.take(x)
+    
+    repository.all.sort_by { |merchant| merchant.revenue }.last
+    assert [some_merchant], repository.most_revenue(1)
+  end
+    #most_revenue(x) returns the top x merchant instances ranked by total revenue
 end

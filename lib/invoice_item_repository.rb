@@ -1,4 +1,4 @@
-require './lib/invoice_item'
+require_relative 'invoice_item'
 
 class InvoiceItemRepository
   attr_reader :invoice_items,
@@ -6,8 +6,12 @@ class InvoiceItemRepository
   def initialize(engine, csv_dir)
     @engine                  = engine
     @invoice_items           = []
-    @invoice_item_repository = CSV.open(csv_dir + '/invoice_items.csv', headers: true, header_converters: :symbol)
+    @invoice_item_repository ||= CSV.open(csv_dir + '/invoice_items.csv', headers: true, header_converters: :symbol)
     build_records(@invoice_item_repository)
+  end
+
+  def random
+    invoice_items.sample
   end
 
   def build_records(repository)
@@ -17,7 +21,11 @@ class InvoiceItemRepository
   def find_by(attribute, value)
     invoice_items.detect do |invoice_item|
       NoAttributeError.new(attribute) if !invoice_item.respond_to?(attribute)
-      invoice_item.send(attribute).downcase == value.downcase
+        if value.class != Fixnum
+          invoice_item.send(attribute).downcase == value.downcase
+        else
+          invoice_item.send(attribute) == value
+        end
     end
   end
 

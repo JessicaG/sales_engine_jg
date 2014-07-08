@@ -6,12 +6,13 @@ class Merchant
               :created_at,
               :updated_at,
               :repository
-
+  # probably passing in a hash for first paremeter and calling it like attributes when
+  # we seperate parse and load
   def initialize(row, repository)
-    @id         = row[:id]
+    @id         = row[:id].to_i
     @name       = row[:name]
-    @created_at  = Date.parse(row[:updated_at]).to_s
-    @updated_at  = Date.parse(row[:created_at]).to_s
+    @created_at = Date.parse(row[:updated_at]).to_s
+    @updated_at = Date.parse(row[:created_at]).to_s
     @repository = repository
   end
 

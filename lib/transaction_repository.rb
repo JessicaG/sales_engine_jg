@@ -1,10 +1,12 @@
+require_relative 'transaction'
+
 class TransactionRepository
   attr_reader :engine,
               :transactions
   def initialize(engine, csv_dir)
     @engine                 = engine
     @transactions           = []
-    @transaction_repository = CSV.open(csv_dir + '/transactions.csv', headers: true, header_converters: :symbol)
+    @transaction_repository ||= CSV.open(csv_dir + '/transactions.csv', headers: true, header_converters: :symbol)
     build_records(@transaction_repository)
   end
 
