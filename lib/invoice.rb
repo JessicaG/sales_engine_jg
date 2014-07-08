@@ -31,10 +31,12 @@ class Invoice
   end
 
   def items
+    # items returns a collection of associated Items by way of
+    # InvoiceItem objects
     invoice_id = self.id
     invoice_items = repository.engine.invoice_item_repository
-    .find_all_by('invoice_id' invoice_id)
-    repository.engine.item_repository.find_all_by('item_id', invoice_id)
+    .find_all_by('invoice_id', invoice_id)
+    repository.engine.item_repository.find_all_by('item_id', invoice_items.first.id)
   end
 
   def customers
