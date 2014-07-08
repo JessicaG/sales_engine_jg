@@ -31,8 +31,10 @@ class Invoice
   end
 
   def items
-    invoice = self.id
-    repository.engine.invoice_item_repository.find_all_by('item_id', invoice)
+    invoice_id = self.id
+    invoice_items = repository.engine.invoice_item_repository
+    .find_all_by('invoice_id' invoice_id)
+    repository.engine.item_repository.find_all_by('item_id', invoice_id)
   end
 
   def customers

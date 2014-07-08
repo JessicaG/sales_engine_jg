@@ -56,8 +56,7 @@ class InvoiceRepository
   end
 
   def find_all_by_status(value)
-    value
-    find_by('status', value)
+    find_all_by('status', value)
   end
 
   def find_all_by_id(value)
