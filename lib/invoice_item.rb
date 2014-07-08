@@ -36,7 +36,7 @@ class InvoiceItem
 
   def price_format(price)
     x = price.to_f / 100
-    BigDecimal.new(x.to_s)
+    BigDecimal.new(x.to_i)
   end
 
   def total_price

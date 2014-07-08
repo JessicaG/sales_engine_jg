@@ -1,5 +1,5 @@
 require 'date'
-
+require 'bigdecimal'
 class Merchant
   attr_reader :id,
               :name,
@@ -49,11 +49,7 @@ class Merchant
       invoices = invoices.find_all { |invoice| invoice.updated_at == date }
     end
     invoices.collect(&:amount).reduce(0, :+)
+
   end
 
-  # # def invoices_by_date(date)
-  # #   invoices.find_all do |invoice|
-  # #     Date.parse(invoice.updated_at) == date
-  # #   end
-  # # end
 end
