@@ -39,4 +39,8 @@ class InvoiceItem
     BigDecimal.new(x.to_s)
   end
 
+  def total_price
+    unit_price * quantity
+  end
+
 end

@@ -66,6 +66,10 @@ class MerchantRepository
   def most_revenue(value)
     0
   end
+  #
+  # def revenue(date)
+  #   merchants.map { |merchant| merchant.revenue(date) }.reduce(0, :+)
+  # end
 
 
 

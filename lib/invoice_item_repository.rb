@@ -59,5 +59,4 @@ class InvoiceItemRepository
     find_all_by('quantity', value)
   end
 
-
 end

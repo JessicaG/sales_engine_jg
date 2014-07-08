@@ -46,9 +46,16 @@ class MerchantRepositoryTest < Minitest::Test
     # find all merchants, sort by revenue, last
 
     #repository.all.sort_by { |merchant| merchant.revenue }.reverse.take(x)
-    
+
     repository.all.sort_by { |merchant| merchant.revenue }.last
     assert [some_merchant], repository.most_revenue(1)
+  end
+
+   def test_it_returns_all_revenue_for_a_specific_date
+    skip
+    date = Date.parse "Tue, 20 Mar 2012"
+    revenue = @merchant.revenue(date)
+    assert_equal BigDecimal.new("2549722.91"), revenue
   end
     #most_revenue(x) returns the top x merchant instances ranked by total revenue
 end
