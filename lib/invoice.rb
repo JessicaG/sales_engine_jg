@@ -45,4 +45,12 @@ class Invoice
     repository.engine.merchant_repository.find_all_by('id', invoice)
   end
 
+  def successful_charge?
+    repository.engine.transaction_repository.transactions.any?(&:successful?)
+  end
+
+  def amount
+    repository.engine.invoice_item_repository.invoice_items.collect(&:total_price).reduce(0, :+)
+  end
+
 end

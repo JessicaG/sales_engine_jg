@@ -27,4 +27,8 @@ class Transaction
     repository.engine.invoice_repository.find_by('id', transaction)
   end
 
+  def successful?
+    result == 'success'
+  end
+
 end

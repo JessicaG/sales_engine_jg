@@ -48,9 +48,12 @@ class InvoiceItemRepository
     invoice_items.select do |invoice_item|
       NoAttributeError.new(attribute) if !invoice_item.respond_to?(attribute)
       invoice_item.send(attribute).downcase == value.downcase
+      if value.class != Fixnum
+        invoice_item.send(attribute).downcase == value.downcase
+      else
+        invoice_item.send(attribute) == value
+      end
     end
   end
-
-
 
 end

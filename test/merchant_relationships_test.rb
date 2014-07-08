@@ -1,4 +1,4 @@
-require_relative './test/test_helper'
+require_relative './test_helper'
 require 'pry'
 
 class MerchantRelationshipsTest < Minitest::Test
@@ -27,7 +27,12 @@ class MerchantRelationshipsTest < Minitest::Test
     assert 1080219, revenue
   end
 
-  def test_it_can_
-    #revenue(date) returns the total revenue for that merchant for a specific invoice date
-
+  #revenue(date) returns the total revenue for that merchant for a specific invoice date
+  def test_it_can_find_revenue_for_a_merchant_by_date
+    skip
+    date = Date.parse "2012-03-27"
+    revenue = @repository.revenue(date)
+    assert reveue >= BigDecimal.new("")
+  end
+  
 end
