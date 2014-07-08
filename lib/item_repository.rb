@@ -15,6 +15,10 @@ class ItemRepository
     @items = repository.map { |row| Item.new(row, self) }
   end
 
+  def inspect
+    "#<#{self.class} #{@items.size} rows>"
+  end
+
   def random
     items.shuffle.pop
   end
@@ -26,7 +30,11 @@ class ItemRepository
   def find_by(attribute, value)
     items.detect do |item|
       NoAttributeError.new(attribute) if !item.respond_to?(attribute)
-      item.send(attribute).to_s.downcase == value.to_s.downcase
+        if value.class != Fixnum
+          item.send(attribute).downcase == value.downcase
+        else
+          item.send(attribute) == value
+        end
     end
   end
 
@@ -41,7 +49,11 @@ class ItemRepository
   def find_all_by(attribute, value)
     items.select do |item|
       NoAttributeError.new(attribute) if !item.respond_to?(attribute)
-      item.send(attribute).to_s.downcase == value.to_s.downcase
+        if value.class != Fixnum
+          item.send(attribute).downcase == value.downcase
+        else
+          item.send(attribute) == value
+        end
     end
   end
 

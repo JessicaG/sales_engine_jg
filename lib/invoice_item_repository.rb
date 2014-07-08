@@ -14,6 +14,10 @@ class InvoiceItemRepository
     invoice_items.sample
   end
 
+  def inspect
+    "#<#{self.class} #{@invoice_items.size} rows>"
+  end
+
   def build_records(repository)
     @invoice_items = repository.map { |row| InvoiceItem.new(row, self) }
   end
@@ -29,10 +33,6 @@ class InvoiceItemRepository
     end
   end
 
-  def find_by_quantity(value)
-    value
-    find_by('quantity', value)
-  end
 
   def find_by_id(value)
     value
@@ -47,13 +47,16 @@ class InvoiceItemRepository
   def find_all_by(attribute, value)
     invoice_items.select do |invoice_item|
       NoAttributeError.new(attribute) if !invoice_item.respond_to?(attribute)
-      invoice_item.send(attribute).downcase == value.downcase
-      if value.class != Fixnum
-        invoice_item.send(attribute).downcase == value.downcase
-      else
-        invoice_item.send(attribute) == value
-      end
+        if value.class != Fixnum
+          invoice_item.send(attribute).downcase == value.downcase
+        else
+          invoice_item.send(attribute) == value
+        end
     end
+  end
+
+  def find_all_by_quantity(value)
+    find_all_by('quantity', value)
   end
 
 end

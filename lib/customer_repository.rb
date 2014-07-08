@@ -16,6 +16,10 @@ class CustomerRepository
     @customers = repository.map { |row| Customer.new(row, self) }
   end
 
+  def inspect
+     "#<#{self.class} #{@customers.size} rows>"
+  end
+
   def random
     customers.shuffle.pop
   end
@@ -27,7 +31,11 @@ class CustomerRepository
   def find_by(attribute, value)
     customers.detect do |customer|
       NoAttributeError.new(attribute) if !customer.respond_to?(attribute)
-      customer.send(attribute).to_s.downcase == value.to_s.downcase
+        if value.class != Fixnum
+          customer.send(attribute).downcase == value.downcase
+        else
+          customer.send(attribute) == value
+        end
     end
   end
 
@@ -47,7 +55,11 @@ class CustomerRepository
   def find_all_by(attribute, value)
     customers.select do |customer|
       NoAttributeError.new(attribute) if !customer.respond_to?(attribute)
-      customer.send(attribute).to_s.downcase == value.to_s.downcase
+        if value.class != Fixnum
+          customer.send(attribute).downcase == value.downcase
+        else
+          customer.send(attribute) == value
+        end
     end
   end
 
