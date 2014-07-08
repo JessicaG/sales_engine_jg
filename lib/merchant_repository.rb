@@ -16,6 +16,10 @@ class MerchantRepository
     @merchants = repository.map { |row| Merchant.new(row, self)}
   end
 
+  def inspect
+    "#<#{self.class} #{@merchants.size} rows>"
+  end
+
   def random
     merchants.sample
   end

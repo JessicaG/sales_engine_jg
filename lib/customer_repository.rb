@@ -16,6 +16,10 @@ class CustomerRepository
     @customers = repository.map { |row| Customer.new(row, self) }
   end
 
+  def inspect
+     "#<#{self.class} #{@customers.size} rows>"
+  end
+
   def random
     customers.shuffle.pop
   end

@@ -15,6 +15,10 @@ class ItemRepository
     @items = repository.map { |row| Item.new(row, self) }
   end
 
+  def inspect
+    "#<#{self.class} #{@items.size} rows>"
+  end
+  
   def random
     items.shuffle.pop
   end

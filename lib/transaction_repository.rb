@@ -14,6 +14,10 @@ class TransactionRepository
     @transactions = repository.map { |row| Transaction.new(row, self) }
   end
 
+  def inspect
+    "#<#{self.class} #{@transactions.size} rows>"
+  end
+
   def random
     transactions.shuffle.pop
   end

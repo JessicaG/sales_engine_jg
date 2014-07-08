@@ -16,6 +16,18 @@ class InvoiceRepository
     @invoices = repository.map { |row| Invoice.new(row, self) }
   end
 
+  def inspect
+    "#<#{self.class} #{@invoices.size} rows>"
+  end
+
+  def random
+    all.sample
+  end
+
+  def all
+    @invoices
+  end
+
   def find_by(attribute, value)
     invoices.detect do |invoice|
       NoAttributeError.new(attribute) if !invoice.respond_to?(attribute)
