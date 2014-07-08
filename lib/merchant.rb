@@ -51,16 +51,11 @@ class Merchant
     invoices.collect(&:amount).reduce(0, :+)
   end
 
-  def total_revenue(date)
-    all_invoices = invoices_by_date(date)
-    all_invoices.reduce(0) { |sum, invoce| sum += invoice.total_price }
-  end
-  #
-  # def invoices_by_date(date)
-  #   invoices.find_all do |invoice|
-  #     Date.parse(invoice.updated_at) == date
-  #   end
-  # end
+  # # def invoices_by_date(date)
+  # #   invoices.find_all do |invoice|
+  # #     Date.parse(invoice.updated_at) == date
+  # #   end
+  # # end
 
 
 end

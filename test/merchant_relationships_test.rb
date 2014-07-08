@@ -31,8 +31,8 @@ class MerchantRelationshipsTest < Minitest::Test
   def test_it_can_find_revenue_for_a_merchant_by_date
     skip
     date = Date.parse "2012-03-27"
-    revenue = @repository.revenue(date)
-    assert reveue >= BigDecimal.new("")
+    revenue = repository.merchant.revenue(date)
+    assert reveue >= BigDecimal.new("2549722.91")
   end
   
 end
