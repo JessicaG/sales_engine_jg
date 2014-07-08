@@ -29,7 +29,11 @@ class TransactionRepository
   def find_by(attribute, value)
     transactions.detect do |transaction|
       NoAttributeError.new(attribute) if !transaction.respond_to?(attribute)
-      transaction.send(attribute).to_s.downcase == value.to_s.downcase
+        if value.class != Fixnum
+          transaction.send(attribute).downcase == value.downcase
+        else
+          transaction.send(attribute) == value
+        end
     end
   end
 
@@ -44,7 +48,11 @@ class TransactionRepository
   def find_all_by(attribute, value)
     transactions.select do |transaction|
       NoAttributeError.new(attribute) if !transaction.respond_to?(attribute)
-      transaction.send(attribute).to_s.downcase == value.to_s.downcase
+        if value.class != Fixnum
+          transaction.send(attribute).downcase == value.downcase
+        else
+          transaction.send(attribute) == value
+        end
     end
   end
 

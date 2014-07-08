@@ -31,7 +31,11 @@ class MerchantRepository
   def find_by(attribute, value)
     merchants.detect do |merchant|
       NoAttributeError.new(attribute) if !merchant.respond_to?(attribute)
-      merchant.send(attribute) == value
+        if value.class != Fixnum
+          merchant.send(attribute).downcase == value.downcase
+        else
+          merchant.send(attribute) == value
+        end
     end
   end
 
@@ -43,7 +47,11 @@ class MerchantRepository
   def find_all_by(attribute, value)
     merchants.select do |merchant|
       NoAttributeError.new(attribute) if !merchant.respond_to?(attribute)
-      merchant.send(attribute) == value
+        if value.class != Fixnum
+          merchant.send(attribute).downcase == value.downcase
+        else
+          merchant.send(attribute) == value
+        end
     end
   end
 
