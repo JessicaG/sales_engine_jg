@@ -1,3 +1,30 @@
+  ____________________
+  Better TDD
+  ____________________
+  # notes from meeting with matt
+  # write assert statement first with our business logic
+  # then work from the bottom to the top
+  # test for the easiest case first
+  # for instance most_revenue(x), for x test for 0, 1, then 2
+  _____________________
+  Refactoring
+  _____________________
+  # make shortcut methods to access the merchants or the items
+  # revenue is such a messy method right now
+  # maybe some shortcut methods in the revenue
+  # where ever your calling that method make a shortcut method
+  # might make invoices = repository.engine.invoice_repository and maybe pass in self and let the shortcut or
+  # helper method take care of returning the invoices
+
+  _____________________
+  Parsing & Loading
+  _____________________
+  # Creation of the repository, needs to be most defintley extracted!
+  # Wether that becomes an array of hashes you pass in
+  # Creation of the repository and the initialization of the data needs to be seperate
+  # Take simples object in the entire system, refactor so it's broken away from CSV, and see how it goes
+  # By simplest object Matt means stand alone, so merchants how do we get data away from passing in a csv row
+  # out of my merchant class into a repository instead
 
 
 
@@ -63,3 +90,8 @@
   #  items = merchant.items
   #  merchant.items.should have(33).items
   # end
+
+
+customer = engine.customer_repository.find_by_id('999')
+customer.invoices.should.have(7).invoices
+ expected 7 invoices, got 6550948
