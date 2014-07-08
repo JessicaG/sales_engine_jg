@@ -52,7 +52,6 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
    def test_it_returns_all_revenue_for_a_specific_date
-    skip
     date = Date.parse "Tue, 20 Mar 2012"
     revenue = @merchant.revenue(date)
     assert_equal BigDecimal.new("2549722.91"), revenue

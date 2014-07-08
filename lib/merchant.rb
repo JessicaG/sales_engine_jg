@@ -56,6 +56,4 @@ class Merchant
   # #     Date.parse(invoice.updated_at) == date
   # #   end
   # # end
-
-
 end
