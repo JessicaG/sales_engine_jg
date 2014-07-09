@@ -26,12 +26,6 @@ class Merchant
     repository.engine.invoice_repository.find_all_by('merchant_id', self.id)
   end
 
-  # def revenue
-  #   total_revenue = paid_invoices.collect { |invoice| invoice.amount }.reduce(:+)
-  #   # reduce(0) { |sum, paid_invoice| sum += paid_invoice.total_price }
-  #   to_bigdecimal(total_revenue)
-  # end
-
   def revenue(date= nil)
     if date.nil?
       total_revenue = paid_invoices.collect { |invoice| invoice.amount }.reduce(:+)
@@ -39,11 +33,6 @@ class Merchant
       total_revenue = paid_invoices.select { |invoice| invoice.created_at == date }.collect { |invoice| invoice.amount }.reduce(:+)
     end
     to_bigdecimal(total_revenue)
-    # invoices = paid_invoices
-    # if date
-    #   invoices = invoices.find_all { |i| i.updated_at == date }
-    # end
-    # invoices.map(&:invoice_amount).reduce(0, :+)
   end
 
   def to_bigdecimal(cents)
@@ -59,44 +48,12 @@ class Merchant
     invoices.collect{|invoice| invoice.customer}
   end
 
-  ## In customer.rb
-  def has_unpaid_invoice_for_merchant_id(id)
-  end
-
   def unpaid_invoices
-    # binding.pry
     invoices.select{ |invoice| invoice.unpaid? }
   end
 
   def customers_with_pending_invoices
-    # find all my invoices
-    # figure out which ones are unpaid
-    # find the customers attached to those invoices
-    # find the unique customers from that set
     unpaid_invoices.collect{|invoice| invoice.customer}.uniq
-
-
-    #
-    # failed_transactions = repository.engine.transaction_repository.all.select{ |transaction| !transaction.successful? }
-    # failed_invoices =
-    # invoices.select do |invoice|
-    #   failed_transactions.each do |failed_transaction|
-    #     invoice.id == failed_transaction.invoice_id
-    #   end
-    # end
-    # binding.pry
-    # customers =
-    # failed_invoices.map do |failed_invoice|
-    #   repository.engine.customer_repository.find_by('id', failed_invoice.customer_id)
-    # end
   end
-  #
-  # def revenue(date= nil)
-  #   invoices = successful_charge
-  #   if date
-  #     invoices = invoices.find_all { |invoice| invoice.updated_at == date }
-  #   end
-  #   invoices.collect(&:amount).reduce(0, :+)
-  #
-  # =>  end
+
 end
