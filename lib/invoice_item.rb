@@ -18,7 +18,7 @@ class InvoiceItem
     @item_id      = row[:item_id].to_i
     @invoice_id   = row[:invoice_id].to_i
     @quantity     = row[:quantity].to_i
-    @unit_price   = to_bigdecimal(row[:unit_price].to_i)
+    @unit_price   = row[:unit_price].to_i
     @created_at   = Date.parse(row[:updated_at]).to_s
     @updated_at   = Date.parse(row[:created_at]).to_s
     @repository   = repository

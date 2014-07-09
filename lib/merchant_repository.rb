@@ -60,7 +60,7 @@ class MerchantRepository
   end
 
   def all
-    merchants
+  merchants
   end
 
   def most_revenue(value)

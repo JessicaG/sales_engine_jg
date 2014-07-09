@@ -1,5 +1,6 @@
 require 'date'
 require 'bigdecimal'
+require 'pry'
 class Merchant
   attr_reader :id,
               :name,
@@ -26,22 +27,27 @@ class Merchant
   end
 
   # def revenue
-  #   paid_invoices
-  #   total_revenue = paid_invoices.reduce(0)
-  #   { |sum, paid_invoice| sum += paid_invoice.total_price }
-  #   # to_bigdecimal(total_revenue)
+  #   total_revenue = paid_invoices.collect { |invoice| invoice.amount }.reduce(:+)
+  #   # reduce(0) { |sum, paid_invoice| sum += paid_invoice.total_price }
+  #   to_bigdecimal(total_revenue)
   # end
 
-  # def revenue(date = nil)
-  #   invoices = paid_invoices
-  #   if date
-  #     invoices = invoices.find_all { |i| i.updated_at == date }
-  #   end
-  #   invoices.map(&:invoice_amount).reduce(0, :+)
-  # end
+  def revenue(date= nil)
+    if date.nil?
+      total_revenue = paid_invoices.collect { |invoice| invoice.amount }.reduce(:+)
+    else
+      total_revenue = paid_invoices.select { |invoice| invoice.created_at == date }.collect { |invoice| invoice.amount }.reduce(:+)
+    end
+    to_bigdecimal(total_revenue)
+    # invoices = paid_invoices
+    # if date
+    #   invoices = invoices.find_all { |i| i.updated_at == date }
+    # end
+    # invoices.map(&:invoice_amount).reduce(0, :+)
+  end
 
   def to_bigdecimal(cents)
-    x = cents.to_i / 100
+    x = cents.to_i / 100.00
     BigDecimal.new(x.to_s)
   end
 
@@ -58,7 +64,8 @@ class Merchant
   end
 
   def unpaid_invoices
-    invoices.select{|invoice| invoice.unpaid?}
+    # binding.pry
+    invoices.select{ |invoice| invoice.unpaid? }
   end
 
   def customers_with_pending_invoices
