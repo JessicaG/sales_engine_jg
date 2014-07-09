@@ -56,4 +56,32 @@ class Merchant
     unpaid_invoices.collect{|invoice| invoice.customer}.uniq
   end
 
+  #favorite_customer returns the Customer who has conducted the most successful transactions
+  def favorite_customer
+    repository.engine.customer_repository.find_by_id(top_customer)
+  end
+    # find all the customers that have paid invoices
+    # return invoice objects
+    # go through each invoice and count
+    # return the first and last name of the customers
+    # how do I determine what "most" is for successful transactions?
+
+    # customer_count = paid_invoices.each_with_object(Hash.new(0))do |invoice, counts|
+    # #increase counts by 1 for every succesful transaction
+    #   counts[invoice.customer_id] +=1
+    # end
+    # top_customer = customer_count.max_by { | ,count| count }[0]
+    # repository.engine.customer_repository.find_by(top_customer_id)
+  # end
+
+  def customer_count
+    paid_invoices.each_with_object(Hash.new(0))do |invoice, counts|
+    counts[invoice.customer_id] +=1
+    end
+  end
+
+  def top_customer
+    customer_count.max_by { |_, count| count }[0]
+  end
+
 end

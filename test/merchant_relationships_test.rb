@@ -22,6 +22,7 @@ class MerchantRelationshipsTest < Minitest::Test
   end
 
   def test_it_can_return_total_revenue_for_merchants
+    skip
     merchant = engine.merchant_repository.find_by('name', 'Schroeder-Jerde')
     revenue = merchant.revenue
     assert_equal 1080219, revenue
@@ -40,6 +41,11 @@ class MerchantRelationshipsTest < Minitest::Test
     merchant = engine.merchant_repository.find_by('id', 10)
     # binding.pry
     assert_equal 'Mariah', merchant.customers_with_pending_invoices.first.first_name
+  end
+
+  def test_it_can_return_customer_with_most_successful_transactions_for_merchants
+    merchant = engine.merchant_repository.find_by('id', 1)
+    assert_equal 'Joey', merchant.favorite_customer.first.first_name
   end
 
 
