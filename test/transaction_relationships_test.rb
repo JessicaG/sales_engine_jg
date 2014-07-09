@@ -22,4 +22,5 @@ class TransactionRelationshipsTest < Minitest::Test
     failures = engine.transaction_repository.all.count { |transaction| !transaction.successful? }
     assert_equal 4, failures
   end
+  
 end

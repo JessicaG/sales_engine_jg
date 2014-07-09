@@ -71,5 +71,9 @@ class CustomerRepository
     find_all_by('last_name', value)
   end
 
+  def top_customer_id
+    engine.repository.invoice
+  end
+
 
 end

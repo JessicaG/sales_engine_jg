@@ -49,7 +49,4 @@ class Item
       end
     best_invoice.created_at
   end
-
-
-
 end

@@ -1,4 +1,5 @@
 require 'date'
+# require 'pry'
 
 class Invoice
 
@@ -15,8 +16,8 @@ class Invoice
     @customer_id    = row[:customer_id].to_i
     @merchant_id    = row[:merchant_id].to_i
     @status         = row[:status]
-    @created_at     = Date.parse(row[:updated_at]).to_s
-    @updated_at     = Date.parse(row[:created_at]).to_s
+    @created_at     = Date.parse(row[:updated_at])
+    @updated_at     = Date.parse(row[:created_at])
     @repository     = repository
   end
 
@@ -59,8 +60,13 @@ class Invoice
 
   def unpaid?
     # transactions.any?(&:failed?)
-    transactions.any? { |transaction| transaction.failed? }
-
+    # find the most recent transaction by date
+    most_recent_transaction = transactions.sort_by { |transaction| transaction.created_at }.last
+    # binding.pry
+    #check the result
+    return true if most_recent_transaction.nil?
+    most_recent_transaction.failed?
+    # transactions.any? { |transaction| transaction.failed? }
   end
 
   def invoice_amount
