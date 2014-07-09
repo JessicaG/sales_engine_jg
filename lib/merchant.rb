@@ -1,5 +1,5 @@
 require 'date'
-
+require 'bigdecimal'
 class Merchant
   attr_reader :id,
               :name,
@@ -22,38 +22,74 @@ class Merchant
   end
 
   def invoices
-    merchant_id = self.id
-    repository.engine.invoice_repository.find_all_by('merchant_id', merchant_id)
+    repository.engine.invoice_repository.find_all_by('merchant_id', self.id)
   end
 
   # def revenue
-  #   merchant_id = self.id
-  #   invoices
-  #   invoices = repository.engine.invoice_repository.find_all_by('merchant_id', merchant_id)
-  #   transactions = invoices.map { |invoice| repository.engine.transaction_repository.find_all_by('invoice_id', invoice.id) }
-  #   .select { |transaction| transaction[0].result == 'success' }
-  #   invoice_items = transactions.map do |transaction|
-  #      repository.engine.invoice_item_repository.find_by('invoice_id', transaction[0].invoice_id)
-  #   end
-  #   revenue = invoice_items.map { |invoice_item| invoice_items[0].quantity * invoice_items[0].unit_price  }
-  #   .reduce(:+)
+  #   paid_invoices
+  #   total_revenue = paid_invoices.reduce(0)
+  #   { |sum, paid_invoice| sum += paid_invoice.total_price }
+  #   # to_bigdecimal(total_revenue)
   # end
 
-  def successful_charge
-    invoices.select(&:successful_charge?)
+  # def revenue(date = nil)
+  #   invoices = paid_invoices
+  #   if date
+  #     invoices = invoices.find_all { |i| i.updated_at == date }
+  #   end
+  #   invoices.map(&:invoice_amount).reduce(0, :+)
+  # end
+
+  def to_bigdecimal(cents)
+    x = cents.to_i / 100
+    BigDecimal.new(x.to_s)
   end
 
-  def revenue(date= nil)
-    invoices = successful_charge
-    if date
-      invoices = invoices.find_all { |invoice| invoice.updated_at == date }
-    end
-    invoices.collect(&:amount).reduce(0, :+)
+  def paid_invoices
+    invoices.find_all(&:successful_charge?)
   end
 
-  # # def invoices_by_date(date)
-  # #   invoices.find_all do |invoice|
-  # #     Date.parse(invoice.updated_at) == date
-  # #   end
-  # # end
+  def customers
+    invoices.collect{|invoice| invoice.customer}
+  end
+
+  ## In customer.rb
+  def has_unpaid_invoice_for_merchant_id(id)
+  end
+
+  def unpaid_invoices
+    invoices.select{|invoice| invoice.unpaid?}
+  end
+
+  def customers_with_pending_invoices
+    # find all my invoices
+    # figure out which ones are unpaid
+    # find the customers attached to those invoices
+    # find the unique customers from that set
+    unpaid_invoices.collect{|invoice| invoice.customer}.uniq
+
+
+    #
+    # failed_transactions = repository.engine.transaction_repository.all.select{ |transaction| !transaction.successful? }
+    # failed_invoices =
+    # invoices.select do |invoice|
+    #   failed_transactions.each do |failed_transaction|
+    #     invoice.id == failed_transaction.invoice_id
+    #   end
+    # end
+    # binding.pry
+    # customers =
+    # failed_invoices.map do |failed_invoice|
+    #   repository.engine.customer_repository.find_by('id', failed_invoice.customer_id)
+    # end
+  end
+  #
+  # def revenue(date= nil)
+  #   invoices = successful_charge
+  #   if date
+  #     invoices = invoices.find_all { |invoice| invoice.updated_at == date }
+  #   end
+  #   invoices.collect(&:amount).reduce(0, :+)
+  #
+  # =>  end
 end

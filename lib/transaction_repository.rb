@@ -18,6 +18,10 @@ class TransactionRepository
     "#<#{self.class} #{@transactions.size} rows>"
   end
 
+  def all
+    transactions
+  end
+
   def random
     transactions.shuffle.pop
   end

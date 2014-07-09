@@ -24,21 +24,24 @@ class MerchantRelationshipsTest < Minitest::Test
   def test_it_can_return_total_revenue_for_merchants
     merchant = engine.merchant_repository.find_by('name', 'Schroeder-Jerde')
     revenue = merchant.revenue
-    assert 1080219, revenue
+    assert_equal 1080219, revenue
   end
 
   def test_it_can_return_revenue_for_merchants_by_date
+    skip
     merchant = engine.merchant_repository.find_by('name', 'Schroeder-Jerde')
     revenue = merchant.revenue
     date = Date.parse "Tue, 20 Mar 2012"
-    assert 1080219, revenue
+    assert_equal BigDecimal.new(''), revenue
   end
 
-  #revenue(date) returns the total revenue for that merchant for a specific invoice date
-  # def test_it_can_find_revenue_for_a_merchant_by_date
-  #   date = Date.parse "2012-03-27"
-  #   revenue = engine.merchant_repository.revenue(date)
-  #   assert reveune >= BigDecimal.new("2549722.91")
-  # end
+  #customers_with_pending_invoices returns a collection of Customer instances which have pending (unpaid) invoices
+  def test_it_can_return_customers_with_pending_invoices
+    merchant = engine.merchant_repository.find_by('id', 10)
+    # binding.pry
+    assert_equal 'Mariah', merchant.customers_with_pending_invoices.first.first_name
+  end
+
+
 
 end

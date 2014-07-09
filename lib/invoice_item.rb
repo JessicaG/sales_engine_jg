@@ -1,4 +1,5 @@
 require 'bigdecimal'
+require 'bigdecimal/util'
 require 'date'
 
 class InvoiceItem
@@ -17,7 +18,7 @@ class InvoiceItem
     @item_id      = row[:item_id].to_i
     @invoice_id   = row[:invoice_id].to_i
     @quantity     = row[:quantity].to_i
-    @unit_price   = price_format(row[:unit_price]).to_i
+    @unit_price   = to_bigdecimal(row[:unit_price].to_i)
     @created_at   = Date.parse(row[:updated_at]).to_s
     @updated_at   = Date.parse(row[:created_at]).to_s
     @repository   = repository
@@ -34,9 +35,8 @@ class InvoiceItem
     repository.engine.item_repository.find_by('id', invoice_item_item_id)
   end
 
-  def price_format(price)
-    x = price.to_f / 100
-    BigDecimal.new(x.to_s)
+  def to_bigdecimal(cents)
+    cents.to_d / 100
   end
 
   def total_price
