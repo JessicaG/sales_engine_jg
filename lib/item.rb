@@ -14,10 +14,10 @@ class Item
     @id          = row[:id].to_i
     @name        = row[:name]
     @description = row[:description]
-    @unit_price  = to_bigdecimal(row[:unit_price].to_i)
+    @unit_price  = row[:unit_price].to_i
     @merchant_id = row[:merchant_id].to_i
-    @created_at  = Date.parse(row[:updated_at]).to_s
-    @updated_at  = Date.parse(row[:created_at]).to_s
+    @created_at  = Date.parse(row[:updated_at])
+    @updated_at  = Date.parse(row[:created_at])
     @repository  = repository
   end
 
@@ -34,22 +34,22 @@ class Item
   end
 
   def best_day
-    invoice_items = repository.engine.invoice_item_repository.find_all_by('item_id', self.id)
-    revenue = invoice_items.max_by { |invoice_item| (invoice_item.quantity * invoice_item.unit_price) }
-    invoice = repository.engine.invoice_repository.find_by('id', revenue.invoice_id)
-    invoice.created_at
-    # invoice_items returns a collection of InvoiceItems associated with this object
-    repository.engine.invoice_item_repository.find_all_by('item_id', self.id )
+    # best_day returns the date with the most sales for the given item using the invoice date
+    invoices = invoice_items.map { |invoice_item| invoice_item.invoice }
+    # the problem i'm having is that invoices can have multiple invoice_items
+    best_invoice =
+      invoices.max_by do |invoice|
+        invoices.each do |i|
+          if invoice.id == i.id
+            invoice.amount + i.amount
+          else
+            invoice.amount
+          end
+        end
+      end
+    best_invoice.created_at
   end
 
-  def merchant
-    # merchant returns an instance of Merchant associated with this object
-    repository.engine.merchant_repository.find_by('id', self.merchant_id)
-  end
 
-  def to_bigdecimal(cents)
-    cents.to_d / 100
->>>>>>> f10fbe3c0163f56b2e495e5edeb511618217ee94
-  end
 
 end
