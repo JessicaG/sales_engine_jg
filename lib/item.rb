@@ -22,13 +22,22 @@ class Item
   end
 
   def invoice_items
-    item = self.id
-    repository.engine.invoice_item_repository.find_all_by('id', item)
+    # invoice_items returns a collection of InvoiceItems
+    # associated with this object
+    repository.engine.invoice_item_repository.find_all_by('item_id', self.id)
   end
 
   def merchant
-    item = self.id
-    repository.engine.merchant_repository.find_by('id', item)
+    # merchant returns an instance of Merchant
+    # associated with this object
+    repository.engine.merchant_repository.find_by('id', self.merchant_id)
+  end
+
+  def best_day
+    invoice_items = repository.engine.invoice_item_repository.find_all_by('item_id', self.id)
+    revenue = invoice_items.max_by { |invoice_item| (invoice_item.quantity * invoice_item.unit_price) }
+    invoice = repository.engine.invoice_repository.find_by('id', revenue.invoice_id)
+    invoice.created_at
   end
 
 end
