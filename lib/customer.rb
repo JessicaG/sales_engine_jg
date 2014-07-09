@@ -29,10 +29,29 @@ class Customer
     ["first_name"] + ["last_name"]
   end
 
+  def paid_invoices
+    invoices.find_all(&:successful_charge?)
+  end
+
   #transactions returns an array of Transaction instances associated with the customer
   def transactions
     customer = self.id
-    repository.engine.transaction_repository.find_all_by('invoice_id', customer)    
+    repository.engine.transaction_repository.find_all_by('invoice_id', customer)
   end
 
+  ##favorite_merchant returns an instance of Merchant where the customer has conducted the most successful transactions
+  def favorite_merchant
+    repository.engine.merchant_repository.find_by_id(top_merchant)
+  end
+
+  def merchant_count
+    paid_invoices.each_with_object(Hash.new(0))do |invoice, merchant_counts|
+    merchant_counts[invoice.merchant_id] +=1
+    end
+  end
+
+  def top_merchant
+    merchant_count.max_by { |_, count| count }[0]
+  end
+  
 end

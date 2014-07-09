@@ -44,6 +44,11 @@ class MerchantRepository
     find_by('name', value)
   end
 
+  def find_by_id(value)
+    value
+    find_by('id', value)
+  end
+
   def find_all_by(attribute, value)
     merchants.select do |merchant|
       NoAttributeError.new(attribute) if !merchant.respond_to?(attribute)
