@@ -23,7 +23,16 @@ class Customer
     #this will return an instance object of first_name Joey and assign his id to customer
     repository.engine.invoice_repository.find_all_by('customer_id', customer)
     # binding.pry
+  end
 
+  def customer_names
+    ["first_name"] + ["last_name"]
+  end
+
+  #transactions returns an array of Transaction instances associated with the customer
+  def transactions
+    customer = self.id
+    repository.engine.transaction_repository.find_all_by('invoice_id', customer)    
   end
 
 end

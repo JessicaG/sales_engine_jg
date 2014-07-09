@@ -21,4 +21,10 @@ class CustomerRelationshipsTest < Minitest::Test
     assert_equal 3, invoices
   end
 
+  def test_transactions_can_return_associated_customer_transactions
+    customer = engine.customer_repository.find_by
+    assert_equal 3, transactions
+  end
+
+
 end
