@@ -23,8 +23,7 @@ class Transaction
   end
 
   def invoice
-    transaction = self.id
-    repository.engine.invoice_repository.find_by('id', transaction)
+    repository.engine.invoice_repository.find_by('id', self.invoice_id)
   end
 
   def successful?
