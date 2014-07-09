@@ -35,4 +35,13 @@ class MerchantRelationshipsTest < Minitest::Test
     assert_equal BigDecimal.new(''), revenue
   end
 
+  #customers_with_pending_invoices returns a collection of Customer instances which have pending (unpaid) invoices
+  def test_it_can_return_customers_with_pending_invoices
+    merchant = engine.merchant_repository.find_by('id', 10)
+    # binding.pry
+    assert_equal 'Mariah', merchant.customers_with_pending_invoices.first.first_name
+  end
+
+
+
 end

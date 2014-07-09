@@ -49,8 +49,18 @@ class Invoice
     repository.engine.merchant_repository.find_all_by('id', invoice)
   end
 
+  def transactions
+    repository.engine.transaction_repository.find_all_by('invoice_id', self.id)
+  end
+
   def successful_charge?
-    repository.engine.transaction_repository.transactions.any?(&:successful?)
+    transactions.any?(&:successful?)
+  end
+
+  def unpaid?
+    # transactions.any?(&:failed?)
+    transactions.any? { |transaction| transaction.failed? }
+
   end
 
   def invoice_amount
@@ -59,9 +69,16 @@ class Invoice
     to_bigdecimal(cents)
   end
 
+  def quantity
+    invoice_items.collect(&:quantity).reduce(0, :+)
+  end
+
+  def amount
+    invoice_items.map(&:total_price).reduce(0, :+)
+  end
+
   def to_bigdecimal(cents)
-    x = cents.to_f / 100
-    BigDecimal.new(x.to_s)
+    cents.to_d / 100
   end
 
 end

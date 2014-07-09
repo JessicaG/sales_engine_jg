@@ -17,4 +17,9 @@ class TransactionRelationshipsTest < Minitest::Test
     assert ['6'], transaction.invoice
     # assert ['6'], transaction.invoice.map(&:invoice_id)
   end
+
+  def test_it_can_return_a_collection_of_failed_invoices
+    failures = engine.transaction_repository.all.count { |transaction| !transaction.successful? }
+    assert_equal 4, failures
+  end
 end
