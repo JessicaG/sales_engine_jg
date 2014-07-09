@@ -47,9 +47,4 @@ class Item
     repository.engine.merchant_repository.find_by('id', self.merchant_id)
   end
 
-  def to_bigdecimal(cents)
-    cents.to_d / 100
->>>>>>> f10fbe3c0163f56b2e495e5edeb511618217ee94
-  end
-
 end
