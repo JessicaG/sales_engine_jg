@@ -49,4 +49,12 @@ class Customer
     merchant_count.max_by { |_, count| count }[0]
   end
 
+  def most_items(value)
+    all.sort_by{ |item| item.quantity_sold }.reverse[0...value]
+  end
+
+  def most_revenue(value)
+    all.sort_by { |item| item.revenue }.reverse[0...value]
+  end
+
 end

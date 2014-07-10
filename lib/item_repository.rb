@@ -64,13 +64,13 @@ class ItemRepository
   def all
     items
   end
-  # 
-  # def most_revenue(value)
-  #   all.sort_by { |item| item.revenue }.reverse[0...value]
-  # end
-  #
-  # def most_items(value)
-  #   all.sort_by { |item| item.amount_sold }.reverse[0...value]
-  # end
+  
+  def most_revenue(value)
+    all.sort_by { |item| item.revenue }.reverse[0...value]
+  end
+
+  def most_items(value)
+    all.sort_by { |item| item.amount_sold }.reverse[0...value]
+  end
 
 end

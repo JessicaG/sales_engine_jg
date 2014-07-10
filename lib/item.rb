@@ -44,17 +44,17 @@ class Item
     best_invoice.created_at
   end
 
-  # def revenue
-  #   unit_price * amount_sold
-  # end
-  #
-  # def amount_sold
-  #   invoice_items = paid_invoice_items
-  #   invoice_items.collect(&:quantity).reduce(0, :+)
-  # end
-  #
-  # def paid_invoice_items
-  #   invoice_items.find_all(&:successful?)
-  # end
+  def revenue
+    unit_price * amount_sold
+  end
+
+  def amount_sold
+    invoice_items = paid_invoice_items
+    invoice_items.collect(&:quantity).reduce(0, :+)
+  end
+
+  def paid_invoice_items
+    invoice_items.find_all(&:successful?)
+  end
 
 end

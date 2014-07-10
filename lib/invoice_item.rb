@@ -37,13 +37,13 @@ class InvoiceItem
   def to_bigdecimal(cents)
     cents.to_d / 100
   end
-  # 
-  # def total_price
-  #   unit_price * quantity
-  # end
-  #
-  # def successful?
-  #   invoice.successful_charge?
-  # end
+
+  def total_price
+    unit_price * quantity
+  end
+
+  def successful?
+    invoice.successful_charge?
+  end
 
 end
