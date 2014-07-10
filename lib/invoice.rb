@@ -58,7 +58,8 @@ class Invoice
   end
 
   def unpaid?
-    most_recent_transaction = transactions.sort_by{ |transaction| transaction.created_at }.last
+    most_recent_transaction =
+    transactions.sort_by{ |transaction| transaction.created_at }.last
     return true if most_recent_transaction.nil?
     most_recent_transaction.failed?
   end
