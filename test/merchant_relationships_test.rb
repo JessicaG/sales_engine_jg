@@ -27,13 +27,6 @@ class MerchantRelationshipsTest < Minitest::Test
     assert_equal 1080219, revenue
   end
 
-  def test_it_can_return_revenue_for_merchants_by_date
-    skip
-    merchant = engine.merchant_repository.find_by('name', 'Schroeder-Jerde')
-    revenue = merchant.revenue
-    date = Date.parse "Tue, 20 Mar 2012"
-    assert_equal BigDecimal.new(''), revenue
-  end
 
   def test_it_can_return_customers_with_pending_invoices
     merchant = engine.merchant_repository.find_by('id', 10)

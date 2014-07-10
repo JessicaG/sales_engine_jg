@@ -8,7 +8,7 @@ class InvoiceRepositoryTest < Minitest::Test
   end
 
   def test_it_can_find_by_invoice_id
-    assert repository.find_by('customer_id', '1')
+    assert repository.find_by('customer_id', 1)
   end
 
   def test_it_can_find_by_status
@@ -20,7 +20,7 @@ class InvoiceRepositoryTest < Minitest::Test
   end
 
   def test_it_can_find_all_by_invoice_id
-    assert repository.find_all_by_id('2')
+    assert repository.find_all_by_id(2)
   end
 
 end

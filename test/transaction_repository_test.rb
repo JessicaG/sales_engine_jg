@@ -22,7 +22,7 @@ class TransactionRepositoryTest < Minitest::Test
   end
 
   def test_it_can_find_by_id
-    assert repository.find_by_id('4')
+    assert repository.find_by_id(4)
   end
 
   def test_if_can_find_all_by_result
