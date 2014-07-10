@@ -8,7 +8,8 @@ class MerchantRepository
   def initialize(engine, csv_dir)
     @engine              = engine
     @merchants           = []
-    @merchant_repository ||= CSV.open(csv_dir + '/merchants.csv', headers: true, header_converters: :symbol)
+    @merchant_repository ||= CSV.open(csv_dir + '/merchants.csv',
+    headers: true, header_converters: :symbol)
     build_records(@merchant_repository)
   end
 
