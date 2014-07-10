@@ -1,5 +1,4 @@
 require './test/test_helper'
-require 'pry'
 
 class TransactionRelationshipsTest < Minitest::Test
   attr_reader :engine

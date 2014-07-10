@@ -1,5 +1,5 @@
 require './test/test_helper'
-require 'pry'
+
 
 class CustomerRelationshipsTest < Minitest::Test
   attr_reader :engine
