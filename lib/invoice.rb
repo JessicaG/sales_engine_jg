@@ -59,19 +59,13 @@ class Invoice
   end
 
   def unpaid?
-    # transactions.any?(&:failed?)
-    # find the most recent transaction by date
     most_recent_transaction = transactions.sort_by { |transaction| transaction.created_at }.last
-    # binding.pry
-    #check the result
     return true if most_recent_transaction.nil?
     most_recent_transaction.failed?
-    # transactions.any? { |transaction| transaction.failed? }
   end
 
   def invoice_amount
     cents = invoice_items.reduce(0) { |sum , invoice_item | sum += invoice_item.total_price }
-    # binding.pry
     to_bigdecimal(cents)
   end
 

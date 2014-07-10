@@ -25,7 +25,6 @@ class InvoiceItem
   end
 
   def invoice
-    # returns an instance of invoice associated with that object
     invoice = self.invoice_id
     repository.engine.invoice_repository.find_by('id', invoice)
   end
