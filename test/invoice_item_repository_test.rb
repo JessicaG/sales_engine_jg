@@ -12,9 +12,6 @@ class InvoiceItemTest < Minitest::Test
     assert repository.find_by_item_id(539)
   end
 
-  def test_it_can_find_by_quantity
-    assert repository.find_by_quantity(5)
-  end
 
   def test_it_can_find_by_id
     assert repository.find_by_id(1)

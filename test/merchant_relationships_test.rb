@@ -33,11 +33,6 @@ class MerchantRelationshipsTest < Minitest::Test
     assert_equal 'Mariah', merchant.customers_with_pending_invoices.first.first_name
   end
 
-  def test_it_can_return_customer_with_most_successful_transactions_for_merchants
-    merchant = engine.merchant_repository.find_by('id', 1)
-    assert_equal 'Joey', merchant.favorite_customer.first.first_name
-  end
-
 
 
 end

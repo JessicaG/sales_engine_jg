@@ -29,8 +29,8 @@ class InvoiceRelationsTest <Minitest::Test
   # customer returns an instance of Customer associated with this object
   def test_invoice_returns_associated_customer
     invoice = engine.invoice_repository.find_by('customer_id', 2)
-    customers = invoice.customers
-    assert [9], invoice.customers
+    customers = invoice.customer
+    assert [9], invoice.customer
   end
 
   # merchant returns an instance of Merchant associated with this object

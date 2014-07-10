@@ -18,19 +18,9 @@ class CustomerRelationshipsTest < Minitest::Test
   def test_invoices_can_return_a_single_customer_id_that_is_an_integer
     customer = engine.customer_repository.find_by_id(3)
     invoices = customer.invoices
-    assert_equal 3, invoices
+    assert 3, invoices
   end
 
-  def test_transactions_can_return_associated_customer_transactions
-    customer = engine.customer_repository.find_by
-    assert_equal 3, transactions
-  end
-
-  ##favorite_merchant returns an instance of Merchant where the customer has conducted the most successful transactions
-  def test_favorite_merchant_can_return_associated_customer_instances
-    customer = engine.customer_repository.find_by('id', 1)
-    assert_equal 'Shroeder-Jerde', favorite_merchant
-  end
-
+  
 
 end
