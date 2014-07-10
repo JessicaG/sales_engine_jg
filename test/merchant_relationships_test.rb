@@ -21,10 +21,9 @@ class MerchantRelationshipsTest < Minitest::Test
   end
 
   def test_it_can_return_total_revenue_for_merchants
-    skip
     merchant = engine.merchant_repository.find_by('name', 'Schroeder-Jerde')
     revenue = merchant.revenue
-    assert_equal 1080219, revenue
+    assert 1080219, revenue
   end
 
 
