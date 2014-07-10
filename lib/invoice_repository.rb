@@ -8,7 +8,8 @@ class InvoiceRepository
   def initialize(engine, csv_dir)
     @engine             = engine
     @invoices           = []
-    @invoice_repository ||= CSV.open(csv_dir + '/invoices.csv', headers: true, header_converters: :symbol)
+    @invoice_repository ||= CSV.open(csv_dir + '/invoices.csv',
+    headers: true, header_converters: :symbol)
     build_records(@invoice_repository)
   end
 

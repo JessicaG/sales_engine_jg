@@ -27,9 +27,12 @@ class Merchant
 
   def revenue(date= nil)
     if date.nil?
-      total_revenue = paid_invoices.collect { |invoice| invoice.amount }.reduce(:+)
+      total_revenue =
+      paid_invoices.collect { |invoice| invoice.amount }.reduce(:+)
     else
-      total_revenue = paid_invoices.select { |invoice| invoice.created_at == date }.collect { |invoice| invoice.amount }.reduce(:+)
+      total_revenue =
+      paid_invoices.select { |invoice| invoice.created_at == date }
+      .collect { |invoice| invoice.amount }.reduce(:+)
     end
     to_bigdecimal(total_revenue)
   end

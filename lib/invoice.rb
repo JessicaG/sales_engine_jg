@@ -41,7 +41,6 @@ class Invoice
   end
 
   def customer
-    # customer returns an instance of Customer associated with this object
     repository.engine.customer_repository.find_by('id', self.customer_id)
   end
 
@@ -59,13 +58,14 @@ class Invoice
   end
 
   def unpaid?
-    most_recent_transaction = transactions.sort_by { |transaction| transaction.created_at }.last
+    most_recent_transaction =
+    transactions.sort_by{ |transaction| transaction.created_at }.last
     return true if most_recent_transaction.nil?
     most_recent_transaction.failed?
   end
 
   def invoice_amount
-    cents = invoice_items.reduce(0) { |sum , invoice_item | sum += invoice_item.total_price }
+    c = invoice_items.reduce(0) { |s , ii | s += ii.total_price }
     to_bigdecimal(cents)
   end
 

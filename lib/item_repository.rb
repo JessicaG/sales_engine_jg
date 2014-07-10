@@ -8,7 +8,8 @@ class ItemRepository
   def initialize(engine, csv_dir)
     @engine          = engine
     @items           = []
-    @item_repository ||= CSV.open(csv_dir + '/items.csv', headers: true, header_converters: :symbol)
+    @item_repository ||= CSV.open(csv_dir + '/items.csv',
+    headers: true, header_converters: :symbol)
     build_records(@item_repository)
   end
 
@@ -72,7 +73,7 @@ class ItemRepository
   def all
     items
   end
-  
+
   def most_revenue(value)
     all.sort_by { |item| item.revenue }.reverse[0...value]
   end
@@ -80,5 +81,4 @@ class ItemRepository
   def most_items(value)
     all.sort_by { |item| item.amount_sold }.reverse[0...value]
   end
-
 end
