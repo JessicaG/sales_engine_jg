@@ -1,5 +1,6 @@
 require_relative 'item'
 require 'date'
+require 'bigdecimal'
 
 class ItemRepository
   attr_reader :items,
@@ -31,7 +32,7 @@ class ItemRepository
   def find_by(attribute, value)
     items.detect do |item|
       NoAttributeError.new(attribute) if !item.respond_to?(attribute)
-        if value.class != Fixnum
+        if value.class != Fixnum && value.class != BigDecimal
           item.send(attribute).downcase == value.downcase
         else
           item.send(attribute) == value
@@ -44,7 +45,14 @@ class ItemRepository
   end
 
   def find_by_unit_price(value)
-    find_by('unit_price', value)
+    items.detect do |item|
+      to_bigdecimal(item.send('unit_price')) == value
+    end
+  end
+
+  def to_bigdecimal(cents)
+    x = cents.to_i / 100.00
+    BigDecimal.new(x.to_s)
   end
 
   def find_all_by(attribute, value)
