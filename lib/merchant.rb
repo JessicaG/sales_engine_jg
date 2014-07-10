@@ -80,6 +80,11 @@ class Merchant
     end
   end
 
+  def amount_sold
+    invoices = paid_invoices
+    invoices.collect(&:quantity).reduce(0, :+)
+  end
+
   def top_customer
     customer_count.max_by { |_, count| count }[0]
   end
