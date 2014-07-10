@@ -25,7 +25,6 @@ class InvoiceItem
   end
 
   def invoice
-    # returns an instance of invoice associated with that object
     invoice = self.invoice_id
     repository.engine.invoice_repository.find_by('id', invoice)
   end
@@ -41,6 +40,10 @@ class InvoiceItem
 
   def total_price
     unit_price * quantity
+  end
+
+  def successful?
+    invoice.successful_charge?
   end
 
 end

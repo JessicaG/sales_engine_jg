@@ -22,21 +22,15 @@ class Item
   end
 
   def invoice_items
-    # invoice_items returns a collection of InvoiceItems
-    # associated with this object
     repository.engine.invoice_item_repository.find_all_by('item_id', self.id)
   end
 
   def merchant
-    # merchant returns an instance of Merchant
-    # associated with this object
     repository.engine.merchant_repository.find_by('id', self.merchant_id)
   end
 
   def best_day
-    # best_day returns the date with the most sales for the given item using the invoice date
     invoices = invoice_items.map { |invoice_item| invoice_item.invoice }
-    # the problem i'm having is that invoices can have multiple invoice_items
     best_invoice =
       invoices.max_by do |invoice|
         invoices.each do |i|
@@ -49,4 +43,18 @@ class Item
       end
     best_invoice.created_at
   end
+
+  def revenue
+    unit_price * amount_sold
+  end
+
+  def amount_sold
+    invoice_items = paid_invoice_items
+    invoice_items.collect(&:quantity).reduce(0, :+)
+  end
+
+  def paid_invoice_items
+    invoice_items.find_all(&:successful?)
+  end
+
 end
